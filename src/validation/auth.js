@@ -1,0 +1,13 @@
+import Joi from 'joi';
+
+export const createUserSchema = Joi.object({
+  email: Joi.string().email().required().messages({
+    'string.email': 'Invalid email format',
+    'any.required': 'Name is a required field',
+  }),
+  password: Joi.string().min(8).max(64).required().messages({
+    'string.min': 'Password must be at least 8 characters long',
+    'string.max': 'Password must be at most 64 characters long',
+    'any.required': 'Password is a required field',
+  }),
+});
