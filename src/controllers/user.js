@@ -7,16 +7,17 @@ import { findUserByIdService, updateUserService } from '../services/user.js';
 export const updateUserAvatar = async (req, res) => {
   const userId = req.user._id;
   const avatar = req.file;
-
+  console.log(avatar);
   let avatarUrl;
 
   if (avatar) {
     if (env('ENABLE_CLOUDINARY') === 'true') {
       avatarUrl = await saveFileToCloudinary(avatar, 'waterTracker');
     } else {
-      avatarUrl = await saveFileToUploadDir(avatar, 'waterTracker');
+      avatarUrl = await saveFileToUploadDir(avatar);
     }
   }
+  console.log(avatarUrl);
   const updatedUser = await updateUserService(userId, {
     avatar: avatarUrl,
   });
@@ -53,7 +54,7 @@ export const updateUser = async (req, res) => {
     if (env('ENABLE_CLOUDINARY') === 'true') {
       avatarUrl = await saveFileToCloudinary(avatar, 'waterTracker');
     } else {
-      avatarUrl = await saveFileToUploadDir(avatar, 'waterTracker');
+      avatarUrl = await saveFileToUploadDir(avatar);
     }
   }
 
