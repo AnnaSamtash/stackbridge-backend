@@ -1,0 +1,61 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Watertracker Web App
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  description: This is a documentation of Contacts Web App
+tags:
+  - name: Auth
+    description: Auth operations.
+  - name: Users
+    description: Operations about users.
+  - name: WaterRate
+    description: Operations about waterRate.
+  - name: Water
+    description: Operations about water.
+servers:
+  - url: http://localhost:3000
+  - url: https://contacts-app-h2mx.onrender.com
+paths:
+  /water:
+    post:
+      $ref: ../swagger/paths/water/postWater.yaml
+  /water/{id}:
+    delete:
+      $ref: ../swagger/paths/water/{id}/deleteWater.yaml
+    patch:
+      $ref: ../swagger/paths/water/{id}/patchWater.yaml
+  /water/today:
+    get:
+      $ref: ../swagger/paths/water/getTodayWater.yaml
+  /water/{year}/{month}:
+    get:
+      $ref: ../swagger/paths/water/{year}/{month}/getMonthlyWater.yaml
+  /auth/signup:
+    post:
+      $ref: ../swagger/paths/auth/signUp.yaml
+  /auth/signin:
+    post:
+      $ref: ../swagger/paths/auth/signIn.yaml
+  /auth/logout:
+    post:
+      $ref: ../swagger/paths/auth/logout.yaml
+  /users:
+    patch:
+      $ref: ../swagger/paths/user/patchUser.yaml
+  /users/avatar:
+    patch:
+      $ref: ../swagger/paths/user/patchAvatar.yaml
+  /users/current:
+    get:
+      $ref: ../swagger/paths/user/currentUserInfo.yaml
+  /waterRate:
+    patch:
+      $ref: ../swagger/paths/waterRate/patchWaterRate.yaml
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

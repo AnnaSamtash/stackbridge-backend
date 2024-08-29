@@ -27,7 +27,7 @@ export const getTodayWaterService = async (userId) => {
 
   const percentOfWaterRate = ((totalWater / user.waterRate) * 100).toFixed();
 
-  return { percentOfWaterRate, todayWaterList };
+  return { percentOfWaterRate: `${percentOfWaterRate}%`, todayWaterList };
 };
 
 export const getMonthlyWaterService = async (userId, year, month) => {

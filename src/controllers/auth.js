@@ -30,7 +30,7 @@ export const loginUser = async (req, res) => {
   }
   const isEqual = await bcrypt.compare(password, user.password);
   if (!isEqual) {
-    throw createHttpError(401, 'User not found');
+    throw createHttpError(401, 'Unauthorized');
   }
   const updatedUser = await updateUserWithTokenService(user._id);
 
@@ -47,12 +47,4 @@ export const logout = async (req, res) => {
   await logoutService(userId);
 
   res.status(204).send();
-};
-
-export const refreshUser = (req, res) => {
-  const { email } = req.user;
-
-  res.status(200).json({
-    email,
-  });
 };

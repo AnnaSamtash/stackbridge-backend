@@ -1,0 +1,1061 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Watertracker Web App",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "description": "This is a documentation of Contacts Web App"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    },
+    {
+      "url": "https://contacts-app-h2mx.onrender.com"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Auth operations."
+    },
+    {
+      "name": "Users",
+      "description": "Operations about users."
+    },
+    {
+      "name": "WaterRate",
+      "description": "Operations about waterRate."
+    },
+    {
+      "name": "Water",
+      "description": "Operations about water."
+    }
+  ],
+  "paths": {
+    "/water": {
+      "post": {
+        "tags": [
+          "Water"
+        ],
+        "summary": "Create water record",
+        "operationId": "WaterController_createWaterRecord",
+        "description": "Create water record with payload",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "amount",
+                  "time"
+                ],
+                "properties": {
+                  "amount": {
+                    "description": "Amount of water in record",
+                    "type": "number",
+                    "example": 250
+                  },
+                  "time": {
+                    "description": "Time of water record",
+                    "type": "string",
+                    "example": "2024-08-28T03:30:00.000Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Water successfully created and return",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/water"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/water/{id}": {
+      "delete": {
+        "tags": [
+          "Water"
+        ],
+        "summary": "Delete water record",
+        "operationId": "WaterController_deleteWaterRecord",
+        "description": "Delete water record",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "65ca67e7ae7f10c88b598384"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Water record by id successfully deleted"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Water"
+        ],
+        "summary": "Change water record",
+        "operationId": "WaterController_updateWaterRecord",
+        "description": "Change water record with payload",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "65ca67e7ae7f10c88b598384"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "amount",
+                  "time"
+                ],
+                "properties": {
+                  "amount": {
+                    "description": "Amount of water in record",
+                    "type": "number",
+                    "example": 250
+                  },
+                  "time": {
+                    "description": "Time of water record",
+                    "type": "string",
+                    "example": "2024-08-28T03:30:00.000Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Water successfully updated by id and return",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/water"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/water/today": {
+      "get": {
+        "tags": [
+          "Water"
+        ],
+        "summary": "Get all water records for today",
+        "operationId": "WaterController_getTodayWaterRecords",
+        "description": "Get all water records for today",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got all water records for today",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/todayWaterRecords"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/water/{year}/{month}": {
+      "get": {
+        "tags": [
+          "Water"
+        ],
+        "summary": "Get all water records for month",
+        "operationId": "WaterController_getMonthlyWaterRecords",
+        "description": "Get all water records for month",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "year",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": 2024
+            }
+          },
+          {
+            "in": "path",
+            "name": "month",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": 8
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got all water records for month",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/monthlyWaterRecords"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/auth/signup": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Sign up new user",
+        "operationId": "AuthController_registerUser",
+        "description": "Create a new user with payload",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email",
+                  "password"
+                ],
+                "properties": {
+                  "email": {
+                    "description": "User's email",
+                    "type": "string",
+                    "example": "Harley.Gleason@gmail.com"
+                  },
+                  "password": {
+                    "description": "User's password",
+                    "type": "string",
+                    "example": "password89"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "New User Registered",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/userWithTokenResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "409": {
+            "$ref": "#/components/responses/409"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/auth/signin": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Sign in existing user",
+        "operationId": "AuthController_loginUser",
+        "description": "Authenticates a user with payload",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email",
+                  "password"
+                ],
+                "properties": {
+                  "email": {
+                    "description": "User's email",
+                    "type": "string",
+                    "example": "Harley.Gleason@gmail.com"
+                  },
+                  "password": {
+                    "description": "User's password",
+                    "type": "string",
+                    "example": "password89"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sign in existing user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/userWithTokenResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Logout a user",
+        "operationId": "AuthController_logout",
+        "description": "Logout a user and clears their token",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "User successfully logged out"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Change current user information",
+        "operationId": "UsersController_updatedUser",
+        "description": "Change and return current user information",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "User's name",
+                    "type": "string",
+                    "default": null,
+                    "example": "Harley Gleason"
+                  },
+                  "email": {
+                    "description": "User's email",
+                    "type": "string",
+                    "format": "email",
+                    "example": "Harley.Gleason@gmail.com"
+                  },
+                  "gender": {
+                    "description": "User's gender",
+                    "type": "string",
+                    "enum": [
+                      "woman",
+                      "man"
+                    ],
+                    "default": "woman"
+                  },
+                  "avatar": {
+                    "description": "User's avatar",
+                    "type": "string",
+                    "default": null,
+                    "format": "binary",
+                    "example": "<https://res.cloudinary.com/dartenrtb/image/upload/v1724914466/waterTracker/ibt3icvvc6hpborulsjb.png>"
+                  },
+                  "waterRate": {
+                    "description": "User's norm of water",
+                    "type": "number",
+                    "default": 2000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User successfully updated and return",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/user"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/avatar": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Change user's avatar'",
+        "operationId": "UsersController_updateUserAvatar",
+        "description": "Change and return user`s avatar",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "avatar": {
+                    "description": "User's avatar",
+                    "type": "string",
+                    "default": null,
+                    "format": "binary",
+                    "example": "<https://res.cloudinary.com/dartenrtb/image/upload/v1724914466/waterTracker/ibt3icvvc6hpborulsjb.png>"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User`s avatar successfully updated and return",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "avatar"
+                  ],
+                  "properties": {
+                    "avatar": {
+                      "description": "User's avatar",
+                      "type": "string",
+                      "default": null,
+                      "format": "binary",
+                      "example": "<https://res.cloudinary.com/dartenrtb/image/upload/v1724914466/waterTracker/ibt3icvvc6hpborulsjb.png>"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/current": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get current user information",
+        "operationId": "UsersController_getUserInfo",
+        "description": "Get and return current user information",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Logged user returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/user"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/waterRate": {
+      "patch": {
+        "tags": [
+          "WaterRate"
+        ],
+        "summary": "Change user's waterRate",
+        "operationId": "WaterRateController_updateWaterRate",
+        "description": "Change and return user`s daily norm of water",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "waterRate"
+                ],
+                "properties": {
+                  "waterRate": {
+                    "description": "User's daily norm of water",
+                    "type": "number",
+                    "default": 2000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User`s waterRate successfully updated and return",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "waterRate"
+                  ],
+                  "properties": {
+                    "waterRate": {
+                      "description": "User's daily norm of water",
+                      "type": "number",
+                      "default": 2000
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "water": {
+        "type": "object",
+        "required": [
+          "_id",
+          "amount",
+          "time",
+          "userId"
+        ],
+        "properties": {
+          "_id": {
+            "description": "Water record ID",
+            "type": "string",
+            "example": "65e4decdd286b30065d54af9"
+          },
+          "amount": {
+            "description": "Amount of water in record",
+            "type": "number",
+            "example": 250
+          },
+          "time": {
+            "description": "Time of water record",
+            "type": "string",
+            "example": "2024-08-28T03:30:00.000Z"
+          },
+          "userId": {
+            "description": "User's id of water record",
+            "type": "string",
+            "example": "65e4decdd286b30065d54af9"
+          }
+        }
+      },
+      "todayWaterRecords": {
+        "type": "object",
+        "required": [
+          "percentOfWaterRate",
+          "todayWaterList"
+        ],
+        "properties": {
+          "percentOfWaterRate": {
+            "type": "string",
+            "example": "11%"
+          },
+          "todayWaterList": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "$ref": "#/components/schemas/water"
+            }
+          }
+        }
+      },
+      "monthlyWaterRecords": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "date",
+            "waterRate",
+            "percentOfWaterRate",
+            "amountOfRecords"
+          ],
+          "properties": {
+            "date": {
+              "type": "string",
+              "example": "27, August"
+            },
+            "waterRate": {
+              "type": "string",
+              "example": "1.8 L"
+            },
+            "percentOfWaterRate": {
+              "type": "string",
+              "example": "28%"
+            },
+            "amountOfRecords": {
+              "type": "number",
+              "example": 5
+            }
+          }
+        }
+      },
+      "userWithTokenResponse": {
+        "type": "object",
+        "required": [
+          "user",
+          "token"
+        ],
+        "properties": {
+          "user": {
+            "type": "object",
+            "required": [
+              "email"
+            ],
+            "properties": {
+              "email": {
+                "type": "string",
+                "format": "email",
+                "example": "Harley.Gleason@gmail.com"
+              }
+            }
+          },
+          "token": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzaWQiOiIyOWI4ZmZmNS0xN2NjLTQ5NTYtOTViZC1jN2U3N2FkZDEwOWEiLCJpYXQiOjE2ODE4OTM3MzEsImV4cCI6MTAwMDAwMDE2ODE4OTM3MzJ9.hQpNKIj4SR7Gm9waUMn7hzwKQyqwKrniL_qSW7Sx"
+          }
+        }
+      },
+      "user": {
+        "type": "object",
+        "required": [
+          "_id",
+          "name",
+          "email",
+          "gender",
+          "avatar",
+          "waterRate"
+        ],
+        "properties": {
+          "_id": {
+            "description": "User's id",
+            "type": "string",
+            "example": "65e4decdd286b30065d54af9"
+          },
+          "name": {
+            "description": "User's name",
+            "type": "string",
+            "default": null,
+            "example": "Harley Gleason"
+          },
+          "email": {
+            "description": "User's email",
+            "type": "string",
+            "format": "email",
+            "example": "Harley.Gleason@gmail.com"
+          },
+          "gender": {
+            "description": "User's gender",
+            "type": "string",
+            "enum": [
+              "woman",
+              "man"
+            ],
+            "default": "woman"
+          },
+          "avatar": {
+            "description": "User's avatar",
+            "type": "string",
+            "default": null,
+            "format": "binary",
+            "example": "<https://res.cloudinary.com/dartenrtb/image/upload/v1724914466/waterTracker/ibt3icvvc6hpborulsjb.png>"
+          },
+          "waterRate": {
+            "description": "User's daily norm of water",
+            "type": "number",
+            "default": 2000
+          }
+        }
+      }
+    },
+    "responses": {
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "BadRequestError"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "BadRequestError"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Unauthorized error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 401
+                },
+                "message": {
+                  "type": "string",
+                  "example": "UnauthorizedError"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 404
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Not Found error"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "User not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "409": {
+        "description": "Conflict Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 409
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Conflict Error"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Email in use"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Internal Server Error"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Something went wrong"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

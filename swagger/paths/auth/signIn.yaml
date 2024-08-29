@@ -1,0 +1,39 @@
+tags:
+  - Auth
+summary: Sign in existing user
+operationId: AuthController_loginUser
+description: 'Authenticates a user with payload'
+security: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - email
+          - password
+        properties:
+          email:
+            description: "User's email"
+            type: string
+            example: 'Harley.Gleason@gmail.com'
+          password:
+            description: "User's password"
+            type: string
+            example: 'password89'
+responses:
+  '200':
+    description: 'Sign in existing user'
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/userWithTokenResponse.yaml'
+  '400':
+    $ref: '../../components/responses/400.yaml'
+  '401':
+    $ref: '../../components/responses/401.yaml'
+  '404':
+    $ref: '../../components/responses/404.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'

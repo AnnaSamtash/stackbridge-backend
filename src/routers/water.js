@@ -5,30 +5,30 @@ import { checkToken } from '../middlewares/checkToken.js';
 import { updateWaterSchema, waterSchema } from '../validation/water.js';
 import { validateId } from '../middlewares/validateId.js';
 import {
-  createWaterInfo,
-  deleteWaterInfo,
-  getMonthlyWater,
-  getTodayWater,
-  updateWaterInfo,
+  createWaterRecord,
+  deleteWaterRecord,
+  getMonthlyWaterRecords,
+  getTodayWaterRecords,
+  updateWaterRecord,
 } from '../controllers/water.js';
 
 const router = Router();
 
 router.use(checkToken);
 
-router.post('/', validateBody(waterSchema), ctrlWrapper(createWaterInfo));
+router.post('/', validateBody(waterSchema), ctrlWrapper(createWaterRecord));
 
 router.patch(
   '/:id',
   validateId,
   validateBody(updateWaterSchema),
-  ctrlWrapper(updateWaterInfo),
+  ctrlWrapper(updateWaterRecord),
 );
 
-router.delete('/:id', validateId, ctrlWrapper(deleteWaterInfo));
+router.delete('/:id', validateId, ctrlWrapper(deleteWaterRecord));
 
-router.get('/today', ctrlWrapper(getTodayWater));
+router.get('/today', ctrlWrapper(getTodayWaterRecords));
 
-router.get('/:year/:month', ctrlWrapper(getMonthlyWater));
+router.get('/:year/:month', ctrlWrapper(getMonthlyWaterRecords));
 
 export default router;

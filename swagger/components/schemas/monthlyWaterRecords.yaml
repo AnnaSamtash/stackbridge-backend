@@ -1,0 +1,21 @@
+type: array
+items:
+  type: object
+  required:
+    - date
+    - waterRate
+    - percentOfWaterRate
+    - amountOfRecords
+  properties:
+    date:
+      type: string
+      example: '27, August'
+    waterRate:
+      type: string
+      example: '1.8 L'
+    percentOfWaterRate:
+      type: string
+      example: '28%'
+    amountOfRecords:
+      type: number
+      example: 5

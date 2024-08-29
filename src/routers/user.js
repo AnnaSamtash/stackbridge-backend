@@ -16,7 +16,7 @@ router.use(checkToken);
 
 router.patch('/avatar', upload.single('avatar'), ctrlWrapper(updateUserAvatar));
 
-router.get('/', ctrlWrapper(getUserInfo));
+router.get('/current', ctrlWrapper(getUserInfo));
 
 router.patch(
   '/',

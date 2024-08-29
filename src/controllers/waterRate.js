@@ -10,14 +10,10 @@ export const updateWaterRate = async (req, res) => {
   });
 
   if (!updatedUser) {
-    throw createHttpError(404, 'Contact not found');
+    throw createHttpError(404, 'User not found');
   }
 
   res.status(200).json({
-    name: updatedUser.name,
-    email: updatedUser.email,
-    gender: updatedUser.gender,
-    photo: updatedUser.photo,
     waterRate: updatedUser.waterRate,
   });
 };

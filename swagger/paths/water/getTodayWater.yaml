@@ -1,0 +1,20 @@
+tags:
+  - Water
+summary: Get all water records for today
+operationId: WaterController_getTodayWaterRecords
+description: 'Get all water records for today'
+security:
+  - bearerAuth: []
+responses:
+  '200':
+    description: 'Successfully got all water records for today'
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/todayWaterRecords.yaml'
+  '404':
+    $ref: '../../components/responses/404.yaml'
+  '401':
+    $ref: '../../components/responses/401.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'

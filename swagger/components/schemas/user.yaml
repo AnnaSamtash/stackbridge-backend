@@ -1,0 +1,38 @@
+type: object
+required:
+  - _id
+  - name
+  - email
+  - gender
+  - avatar
+  - waterRate
+properties:
+  _id:
+    description: "User's id"
+    type: string
+    example: 65e4decdd286b30065d54af9
+  name:
+    description: "User's name"
+    type: string
+    default: null
+    example: 'Harley Gleason'
+  email:
+    description: "User's email"
+    type: string
+    format: email
+    example: 'Harley.Gleason@gmail.com'
+  gender:
+    description: "User's gender"
+    type: string
+    enum: ['woman', 'man']
+    default: woman
+  avatar:
+    description: "User's avatar"
+    type: string
+    default: null
+    format: binary
+    example: <https://res.cloudinary.com/dartenrtb/image/upload/v1724914466/waterTracker/ibt3icvvc6hpborulsjb.png>
+  waterRate:
+    description: "User's daily norm of water"
+    type: number
+    default: 2000

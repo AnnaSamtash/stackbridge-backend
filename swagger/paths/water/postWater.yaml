@@ -1,0 +1,38 @@
+tags:
+  - Water
+summary: Create water record
+operationId: WaterController_createWaterRecord
+description: 'Create water record with payload'
+security:
+  - bearerAuth: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - amount
+          - time
+        properties:
+          amount:
+            description: 'Amount of water in record'
+            type: number
+            example: 250
+          time:
+            description: 'Time of water record'
+            type: string
+            example: '2024-08-29 05:30 AM'
+responses:
+  '201':
+    description: 'Water successfully created and return'
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/water.yaml'
+  '400':
+    $ref: '../../components/responses/400.yaml'
+  '401':
+    $ref: '../../components/responses/401.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'

@@ -1,0 +1,44 @@
+tags:
+  - Users
+summary: Change user's avatar'
+operationId: UsersController_updateUserAvatar
+description: 'Change and return user`s avatar'
+security:
+  - bearerAuth: []
+requestBody:
+  required: true
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        properties:
+          avatar:
+            description: "User's avatar"
+            type: string
+            default: null
+            format: binary
+            example: <https://res.cloudinary.com/dartenrtb/image/upload/v1724914466/waterTracker/ibt3icvvc6hpborulsjb.png>
+responses:
+  '200':
+    description: 'User`s avatar successfully updated and return'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - avatar
+          properties:
+            avatar:
+              description: "User's avatar"
+              type: string
+              default: null
+              format: binary
+              example: <https://res.cloudinary.com/dartenrtb/image/upload/v1724914466/waterTracker/ibt3icvvc6hpborulsjb.png>
+  '400':
+    $ref: '../../components/responses/400.yaml'
+  '401':
+    $ref: '../../components/responses/401.yaml'
+  '404':
+    $ref: '../../components/responses/404.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'

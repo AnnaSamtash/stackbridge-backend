@@ -1,0 +1,13 @@
+type: object
+required:
+  - percentOfWaterRate
+  - todayWaterList
+properties:
+  percentOfWaterRate:
+    type: string
+    example: '11%'
+  todayWaterList:
+    type: array
+    items:
+      type: object
+      $ref: '../../components/schemas/water.yaml'

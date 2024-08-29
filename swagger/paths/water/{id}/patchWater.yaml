@@ -1,0 +1,45 @@
+tags:
+  - Water
+summary: Change water record
+operationId: WaterController_updateWaterRecord
+description: 'Change water record with payload'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: '65ca67e7ae7f10c88b598384'
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - amount
+          - time
+        properties:
+          amount:
+            description: 'Amount of water in record'
+            type: number
+            example: 250
+          time:
+            description: 'Time of water record'
+            type: string
+            example: '2024-08-29 05:30 AM'
+responses:
+  '200':
+    description: 'Water successfully updated by id and return'
+    content:
+      application/json:
+        schema:
+          $ref: '../../../components/schemas/water.yaml'
+  '401':
+    $ref: '../../../components/responses/401.yaml'
+  '404':
+    $ref: '../../../components/responses/404.yaml'
+  '500':
+    $ref: '../../../components/responses/500.yaml'

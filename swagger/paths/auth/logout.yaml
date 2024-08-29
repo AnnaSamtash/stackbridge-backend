@@ -1,0 +1,14 @@
+tags:
+  - Auth
+summary: Logout a user
+operationId: AuthController_logout
+description: 'Logout a user and clears their token'
+security:
+  - bearerAuth: []
+responses:
+  '204':
+    description: 'User successfully logged out'
+  '401':
+    $ref: '../../components/responses/401.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'

@@ -1,0 +1,42 @@
+tags:
+  - WaterRate
+summary: Change user's waterRate
+operationId: WaterRateController_updateWaterRate
+description: 'Change and return user`s daily norm of water'
+security:
+  - bearerAuth: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - waterRate
+        properties:
+          waterRate:
+            description: "User's daily norm of water"
+            type: number
+            default: 2000
+responses:
+  '200':
+    description: 'User`s waterRate successfully updated and return'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - waterRate
+          properties:
+            waterRate:
+              description: "User's daily norm of water"
+              type: number
+              default: 2000
+  '400':
+    $ref: '../../components/responses/400.yaml'
+  '401':
+    $ref: '../../components/responses/401.yaml'
+  '404':
+    $ref: '../../components/responses/404.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'
