@@ -16,8 +16,7 @@ tags:
   - name: Water
     description: Operations about water.
 servers:
-  - url: http://localhost:3000
-  - url: https://contacts-app-h2mx.onrender.com
+  - url: https://watertracker-app.onrender.com
 paths:
   /water:
     post:
