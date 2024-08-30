@@ -1,8 +1,10 @@
 tags:
   - Users
-summary: Change current user information
+summary: Update current user's data
 operationId: UsersController_updatedUser
-description: 'Change and return current user information'
+description: |
+  Update and return current user's data
+
 security:
   - bearerAuth: []
 requestBody:
@@ -43,7 +45,23 @@ requestBody:
             example: 'pasword89'
 responses:
   '200':
-    description: 'User successfully updated and return'
+    description: |
+      User's data updated and returned
+
+      Description of response parameters:
+
+      **_id** - ObjectId, unique user ID.
+
+      **name** - string, user's name.
+
+      **email** - string, user's email.
+
+      **gender** - string, user's gender.
+
+      **waterRate** - number, user's daily norm of water.
+
+      **avatar** - string, user's avatar.
+
     content:
       application/json:
         schema:

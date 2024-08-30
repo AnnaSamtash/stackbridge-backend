@@ -1,0 +1,51 @@
+tags:
+  - Auth
+summary: Send email for reset password
+operationId: AuthController_requestResetEmail
+description: |
+  Create reset jwt and send email with link to reset password page
+
+  When the user presses the password reset button, he makes a request
+    to URL/api/auth/send-reset-email with a registered email. The server
+    checks the presence of the user in the system using the transmitted
+    email, if it finds that it forms a jwt token and transfers it to the link
+    to reset password page in the email.If a user with such mail is not found,
+    then the server returns this result in an error with the status 404th.
+
+security: []
+requestBody:
+  required: true
+  description: |
+    # Description of request parameters:
+
+    **email** - string, user's email.
+    **Required parameter**
+
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - email
+        properties:
+          email:
+            description: "User's email"
+            type: string
+            example: 'Harley.Gleason@gmail.com'
+responses:
+  '200':
+    description: |
+      Reset password email successfully send
+
+      Description of response parameters:
+
+      empty object
+
+    content:
+      application/json:
+        schema:
+          type: object
+  '404':
+    $ref: '../../components/responses/404.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'

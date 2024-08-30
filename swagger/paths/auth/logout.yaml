@@ -2,12 +2,23 @@ tags:
   - Auth
 summary: Logout a user
 operationId: AuthController_logout
-description: 'Logout a user and clears their token'
+description: |
+  The logout endpoint is a logout mechanism that destroys the 
+    token that was issued during previous authentication.
+
+  When the user clicks the log out button, he makes a request for a
+    URL/api/auth/logout with a valid token in the Authorization header.
+    The server checks the validity of the token, if the token is valid,
+    then the token is deleted and the user returns to the login page.
+    If the token is not valid, the server returns the 401 status and
+    reports that the token is invalid.
+
 security:
   - bearerAuth: []
 responses:
   '204':
-    description: 'User successfully logged out'
+    description: |
+      User successfully logged out
   '401':
     $ref: '../../components/responses/401.yaml'
   '500':

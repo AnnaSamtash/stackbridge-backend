@@ -2,7 +2,9 @@ tags:
   - Water
 summary: Get all water records for month
 operationId: WaterController_getMonthlyWaterRecords
-description: 'Get all water records for month'
+description: |
+  Get and return all water records for month
+
 security:
   - bearerAuth: []
 parameters:
@@ -20,7 +22,22 @@ parameters:
       example: 08
 responses:
   '200':
-    description: 'Successfully got all water records for month'
+    description: |
+      Got and returned all water records for month
+
+      Description of response parameters:
+
+      Return array of objects, each of which includes these properties:
+
+      **date** - string, date of month.
+
+      **waterRate** - number, user's daily norm of water.
+
+      **percentOfWaterRate** - string, percentage of water drunk to the
+      daily rate of water by date'.
+
+      **amountOfRecords** - number, amount of water records by date.
+
     content:
       application/json:
         schema:

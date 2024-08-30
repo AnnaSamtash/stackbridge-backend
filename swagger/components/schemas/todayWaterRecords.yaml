@@ -4,10 +4,13 @@ required:
   - todayWaterList
 properties:
   percentOfWaterRate:
+    description: 'Percentage of water drunk to the daily rate of water '
     type: string
     example: '11%'
   todayWaterList:
+    description: 'list of water records by today'
     type: array
     items:
+      description: 'Water record'
       type: object
       $ref: '../../components/schemas/water.yaml'

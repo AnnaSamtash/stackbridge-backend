@@ -1,8 +1,9 @@
 tags:
   - Users
-summary: Change user's avatar'
+summary: Update user's avatar'
 operationId: UsersController_updateUserAvatar
-description: 'Change and return user`s avatar'
+description: |
+  Update and return user's avatar
 security:
   - bearerAuth: []
 requestBody:
@@ -20,7 +21,13 @@ requestBody:
             example: <https://res.cloudinary.com/dartenrtb/image/upload/v1724914466/waterTracker/ibt3icvvc6hpborulsjb.png>
 responses:
   '200':
-    description: 'User`s avatar successfully updated and return'
+    description: |
+      User`s avatar updated and returned
+
+      Description of response parameters:
+
+      **avatar** - string, user's avatar.
+
     content:
       application/json:
         schema:

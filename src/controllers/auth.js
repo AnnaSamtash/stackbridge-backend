@@ -1,6 +1,8 @@
 import {
   createUserService,
   logoutService,
+  requestResetTokenService,
+  resetPasswordService,
   updateUserWithTokenService,
 } from '../services/auth.js';
 import createHttpError from 'http-errors';
@@ -47,4 +49,24 @@ export const logout = async (req, res) => {
   await logoutService(userId);
 
   res.status(204).send();
+};
+
+export const requestResetEmail = async (req, res) => {
+  await requestResetTokenService(req.body.email);
+
+  res.json({
+    status: 200,
+    message: 'Reset password email was successfully sent!',
+    data: {},
+  });
+};
+
+export const resetPassword = async (req, res) => {
+  await resetPasswordService(req.body);
+
+  res.json({
+    message: 'Password has been successfully reset.',
+    status: 200,
+    data: {},
+  });
 };

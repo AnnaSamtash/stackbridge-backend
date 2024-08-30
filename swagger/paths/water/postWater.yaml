@@ -1,12 +1,23 @@
 tags:
   - Water
-summary: Create water record
+summary: Create a water record
 operationId: WaterController_createWaterRecord
-description: 'Create water record with payload'
+description: |
+  Create a water record in the database and return it
+
 security:
   - bearerAuth: []
 requestBody:
   required: true
+  description: |
+    # Description of request parameters:
+
+    **amount** - number, Amount of water in record.
+    **Required parameter**
+
+    **time** - string, Time of water record.
+    **Required parameter**
+
   content:
     application/json:
       schema:
@@ -25,7 +36,19 @@ requestBody:
             example: '2024-08-29 05:30 AM'
 responses:
   '201':
-    description: 'Water successfully created and return'
+    description: |
+      Water record created and returned
+
+      Description of response parameters:
+
+      **_id** - ObjectId, unique water record ID.
+
+      **amount** - number, amount of water in record.
+
+      **time** - string, time of water record.
+
+      **serId** - ObjectId, unique user ID.
+
     content:
       application/json:
         schema:

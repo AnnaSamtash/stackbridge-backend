@@ -2,12 +2,30 @@ tags:
   - Users
 summary: Get current user information
 operationId: UsersController_getUserInfo
-description: 'Get and return current user information'
+description: |
+  Get and return current user's data from database
+
 security:
   - bearerAuth: []
 responses:
   '200':
-    description: 'Logged user returned'
+    description: |
+      Logged user returned
+
+      Description of response parameters:
+
+      **_id** - ObjectId, unique user ID.
+
+      **name** - string, user's name.
+
+      **email** - string, user's email.
+
+      **gender** - string, user's gender.
+
+      **avatar** - string, user's avatar.
+
+      **waterRate** - string, user's daily norm of water.
+
     content:
       application/json:
         schema:

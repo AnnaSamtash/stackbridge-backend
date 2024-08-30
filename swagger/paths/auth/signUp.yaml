@@ -2,10 +2,23 @@ tags:
   - Auth
 summary: Sign up new user
 operationId: AuthController_registerUser
-description: 'Create a new user with payload'
+description: |
+  Create a new user in the database
+
 security: []
 requestBody:
   required: true
+  description: |
+    New User Registered
+
+    # Description of request parameters:
+
+    **email** - string, user's email.
+    **Required parameter**
+
+    **password** - string, user's password.
+    **Required parameter**
+
   content:
     application/json:
       schema:
@@ -24,13 +37,21 @@ requestBody:
             example: 'password89'
 responses:
   '201':
-    description: 'New User Registered'
+    description: |
+      New User Registered
+
+      Description of response parameters:
+
+      **user** - object, includes user's email.
+
+      **token** - string, token is used to store the authorization state
+      of the user in the system, which allows users to make secure requests
+      to the API.
+
     content:
       application/json:
         schema:
           $ref: '../../components/schemas/userWithTokenResponse.yaml'
-  '400':
-    $ref: '../../components/responses/400.yaml'
   '409':
     $ref: '../../components/responses/409.yaml'
   '500':

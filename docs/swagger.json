@@ -2,19 +2,22 @@
   "openapi": "3.1.0",
   "info": {
     "version": "1.0.0",
-    "title": "Watertracker Web App",
+    "title": "WaterTracker Web App",
     "license": {
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "description": "This is a documentation of Contacts Web App"
+    "description": "API documentation for project WaterTracker Web App\n\nThis project is a web application for managing the amount of water\n  drunk during the day, will calculate a personal daily rate of fluid\n  consumption based on client data, and will also provide statistics\n  on the amount of fluid drunk per day and month. This allows users\n  to adjust their lifestyle and evaluate progress on the path to\n  healing the whole organism.\n\nThe project provides the ability to register users, their authentication\n  and authorization. In addition, users can create and track their fluid\n  intake, edit their data and records of these intakes, view statistics\n  of their consumption for a certain period of time, and calculate and\n  update the daily rate of fluid intake depending on changes in indicators.\n\nIn addition, the application has a friendly and intuitive user interface\n  that allows you to conveniently and quickly perform all the necessary\n  actions. The project also ensures the security of users through password\n  encryption and identification using tokens.\n\n**Functionality:**\n\nUser registration and authorization\n\nAbility to update your data in the application, download the avatar or even\nchange the password in a convenient form\n\nAddition, modification and deletion of records of the amount of consumer\nfluid with the determination of the time of its reception\n\nCalculation and updating of the personal daily rate of fluid consumption\ndepending on changes in indicators\n\nDisplaying detailed statistics for the month and for the day about the\namount of consumer fluid and percentage of the norm\n\n**Technology stack used in the project:**\n\nNode.js - JavaScript server runtime\n\nExpress.js - framework for developing web applications on Node.js\n\nMongoDB - NoSQL Database\n\nNode.js - JavaScript server runtime\n\nExpress.js - framework for developing web applications on Node.js\n\nMongoDB - NoSQL Database\n\nMongoose - library for working with MongoDB in Node.js",
+    "contact": {
+      "email": "annasamtash@gmail.com"
+    }
   },
   "servers": [
     {
       "url": "http://localhost:3000"
     },
     {
-      "url": "https://contacts-app-h2mx.onrender.com"
+      "url": "https://watertracker-app.onrender.com"
     }
   ],
   "tags": [
@@ -32,7 +35,7 @@
     },
     {
       "name": "Water",
-      "description": "Operations about water."
+      "description": "Operations about water record."
     }
   ],
   "paths": {
@@ -41,9 +44,9 @@
         "tags": [
           "Water"
         ],
-        "summary": "Create water record",
+        "summary": "Create a water record",
         "operationId": "WaterController_createWaterRecord",
-        "description": "Create water record with payload",
+        "description": "Create a water record in the database and return it\n",
         "security": [
           {
             "bearerAuth": []
@@ -51,6 +54,7 @@
         ],
         "requestBody": {
           "required": true,
+          "description": "# Description of request parameters:\n\n**amount** - number, Amount of water in record.\n**Required parameter**\n\n**time** - string, Time of water record.\n**Required parameter**\n",
           "content": {
             "application/json": {
               "schema": {
@@ -68,7 +72,7 @@
                   "time": {
                     "description": "Time of water record",
                     "type": "string",
-                    "example": "2024-08-28T03:30:00.000Z"
+                    "example": "2024-08-29 05:30 AM"
                   }
                 }
               }
@@ -77,7 +81,7 @@
         },
         "responses": {
           "201": {
-            "description": "Water successfully created and return",
+            "description": "Water record created and returned\n\nDescription of response parameters:\n\n**_id** - ObjectId, unique water record ID.\n\n**amount** - number, amount of water in record.\n\n**time** - string, time of water record.\n\n**serId** - ObjectId, unique user ID.\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -103,9 +107,9 @@
         "tags": [
           "Water"
         ],
-        "summary": "Delete water record",
+        "summary": "Delete a water record",
         "operationId": "WaterController_deleteWaterRecord",
-        "description": "Delete water record",
+        "description": "Delete a water record\n",
         "security": [
           {
             "bearerAuth": []
@@ -124,7 +128,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Water record by id successfully deleted"
+            "description": "Water record by id deleted\n"
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -141,9 +145,9 @@
         "tags": [
           "Water"
         ],
-        "summary": "Change water record",
+        "summary": "Update a water record",
         "operationId": "WaterController_updateWaterRecord",
-        "description": "Change water record with payload",
+        "description": "Update and return a water record\n",
         "security": [
           {
             "bearerAuth": []
@@ -162,6 +166,7 @@
         ],
         "requestBody": {
           "required": true,
+          "description": "# Description of request parameters:\n\n**amount** - number, amount of water in record.\n\n**time** - string, time of water record.\n",
           "content": {
             "application/json": {
               "schema": {
@@ -179,7 +184,7 @@
                   "time": {
                     "description": "Time of water record",
                     "type": "string",
-                    "example": "2024-08-28T03:30:00.000Z"
+                    "example": "2024-08-29 05:30 AM"
                   }
                 }
               }
@@ -188,7 +193,7 @@
         },
         "responses": {
           "200": {
-            "description": "Water successfully updated by id and return",
+            "description": "Water record updated by id and returned\n\nDescription of response parameters:\n\n**_id** - ObjectId, unique water record ID.\n\n**amount** - number, amount of water in record.\n\n**time** - string, time of water record.\n\n**serId** - ObjectId, unique user ID.\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -216,7 +221,7 @@
         ],
         "summary": "Get all water records for today",
         "operationId": "WaterController_getTodayWaterRecords",
-        "description": "Get all water records for today",
+        "description": "Get and return all water records for today\n",
         "security": [
           {
             "bearerAuth": []
@@ -224,7 +229,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully got all water records for today",
+            "description": "Got and returned all water records for today\n\nDescription of response parameters:\n\nReturn array of objects, each of which includes these properties:\n\n**_id** - ObjectId, unique water record ID.\n\n**amount** - number, amount of water in record.\n\n**time** - string, time of water record.\n\n**serId** - ObjectId, unique user ID.\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -252,7 +257,7 @@
         ],
         "summary": "Get all water records for month",
         "operationId": "WaterController_getMonthlyWaterRecords",
-        "description": "Get all water records for month",
+        "description": "Get and return all water records for month\n",
         "security": [
           {
             "bearerAuth": []
@@ -280,7 +285,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully got all water records for month",
+            "description": "Got and returned all water records for month\n\nDescription of response parameters:\n\nReturn array of objects, each of which includes these properties:\n\n**date** - string, date of month.\n\n**waterRate** - number, user's daily norm of water.\n\n**percentOfWaterRate** - string, percentage of water drunk to the\ndaily rate of water by date'.\n\n**amountOfRecords** - number, amount of water records by date.\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -308,10 +313,11 @@
         ],
         "summary": "Sign up new user",
         "operationId": "AuthController_registerUser",
-        "description": "Create a new user with payload",
+        "description": "Create a new user in the database\n",
         "security": [],
         "requestBody": {
           "required": true,
+          "description": "New User Registered\n\n# Description of request parameters:\n\n**email** - string, user's email.\n**Required parameter**\n\n**password** - string, user's password.\n**Required parameter**\n",
           "content": {
             "application/json": {
               "schema": {
@@ -338,7 +344,7 @@
         },
         "responses": {
           "201": {
-            "description": "New User Registered",
+            "description": "New User Registered\n\nDescription of response parameters:\n\n**user** - object, includes user's email.\n\n**token** - string, token is used to store the authorization state\nof the user in the system, which allows users to make secure requests\nto the API.\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -346,9 +352,6 @@
                 }
               }
             }
-          },
-          "400": {
-            "$ref": "#/components/responses/400"
           },
           "409": {
             "$ref": "#/components/responses/409"
@@ -366,10 +369,11 @@
         ],
         "summary": "Sign in existing user",
         "operationId": "AuthController_loginUser",
-        "description": "Authenticates a user with payload",
+        "description": "User authentication and authorization by passed email and password\n",
         "security": [],
         "requestBody": {
           "required": true,
+          "description": "# Description of request parameters:\n\n**email** - string, user's email.\n**Required parameter**\n\n**password** - string, user's password.\n**Required parameter**\n",
           "content": {
             "application/json": {
               "schema": {
@@ -396,7 +400,7 @@
         },
         "responses": {
           "200": {
-            "description": "Sign in existing user",
+            "description": "Sign in existing user\n\nDescription of response parameters:\n\n**user** - object, includes user's email.\n\n**token** - string, token is used to store the authorization state\nof the user in the system, which allows users to make secure requests\nto the API.\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -404,9 +408,6 @@
                 }
               }
             }
-          },
-          "400": {
-            "$ref": "#/components/responses/400"
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -427,7 +428,7 @@
         ],
         "summary": "Logout a user",
         "operationId": "AuthController_logout",
-        "description": "Logout a user and clears their token",
+        "description": "The logout endpoint is a logout mechanism that destroys the \n  token that was issued during previous authentication.\n\nWhen the user clicks the log out button, he makes a request for a\n  URL/api/auth/logout with a valid token in the Authorization header.\n  The server checks the validity of the token, if the token is valid,\n  then the token is deleted and the user returns to the login page.\n  If the token is not valid, the server returns the 401 status and\n  reports that the token is invalid.\n",
         "security": [
           {
             "bearerAuth": []
@@ -435,10 +436,103 @@
         ],
         "responses": {
           "204": {
-            "description": "User successfully logged out"
+            "description": "User successfully logged out\n"
           },
           "401": {
             "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/auth/send-reset-email": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Send email for reset password",
+        "operationId": "AuthController_requestResetEmail",
+        "description": "Create reset jwt and send email with link to reset password page\n\nWhen the user presses the password reset button, he makes a request\n  to URL/api/auth/send-reset-email with a registered email. The server\n  checks the presence of the user in the system using the transmitted\n  email, if it finds that it forms a jwt token and transfers it to the link\n  to reset password page in the email.If a user with such mail is not found,\n  then the server returns this result in an error with the status 404th.\n",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "description": "# Description of request parameters:\n\n**email** - string, user's email.\n**Required parameter**\n",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email"
+                ],
+                "properties": {
+                  "email": {
+                    "description": "User's email",
+                    "type": "string",
+                    "example": "Harley.Gleason@gmail.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Reset password email successfully send\n\nDescription of response parameters:\n\nempty object\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/auth/reset-password": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Reset password",
+        "operationId": "AuthController_resetPassword",
+        "description": "Overwrites the user password field value in the database\n",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "description": "# Description of request parameters:\n\n**password** - string, user's new password.\n**Required parameter**\n\n**token** - string, token is used to store the authorization\nstate of the user in the system, which allows users to make\nsecure requests to the API.\n**Required parameter**\n",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/resetPassword"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Password  successfully reset\n\nDescription of response parameters:\n\nempty object\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
           },
           "500": {
             "$ref": "#/components/responses/500"
@@ -451,9 +545,9 @@
         "tags": [
           "Users"
         ],
-        "summary": "Change current user information",
+        "summary": "Update current user's data",
         "operationId": "UsersController_updatedUser",
-        "description": "Change and return current user information",
+        "description": "Update and return current user's data\n",
         "security": [
           {
             "bearerAuth": []
@@ -461,6 +555,7 @@
         ],
         "requestBody": {
           "required": true,
+          "description": "# Description of request parameters:\n\n**name** - string, user's name.\n\n**email** - string, user's email.\n\n**gender** - string, user's gender.\n\n**waterRate** - number, user's daily norm of water.\n\n**avatar** - string, user's avatar.\n\n**password** - string, user's password.\n",
           "content": {
             "multipart/form-data": {
               "schema": {
@@ -495,9 +590,14 @@
                     "example": "<https://res.cloudinary.com/dartenrtb/image/upload/v1724914466/waterTracker/ibt3icvvc6hpborulsjb.png>"
                   },
                   "waterRate": {
-                    "description": "User's norm of water",
+                    "description": "User's daily norm of water",
                     "type": "number",
                     "default": 2000
+                  },
+                  "password": {
+                    "description": "User's password",
+                    "type": "string",
+                    "example": "pasword89"
                   }
                 }
               }
@@ -506,7 +606,7 @@
         },
         "responses": {
           "200": {
-            "description": "User successfully updated and return",
+            "description": "User's data updated and returned\n\nDescription of response parameters:\n\n**_id** - ObjectId, unique user ID.\n\n**name** - string, user's name.\n\n**email** - string, user's email.\n\n**gender** - string, user's gender.\n\n**waterRate** - number, user's daily norm of water.\n\n**avatar** - string, user's avatar.\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -535,9 +635,9 @@
         "tags": [
           "Users"
         ],
-        "summary": "Change user's avatar'",
+        "summary": "Update user's avatar'",
         "operationId": "UsersController_updateUserAvatar",
-        "description": "Change and return user`s avatar",
+        "description": "Update and return user's avatar\n",
         "security": [
           {
             "bearerAuth": []
@@ -545,6 +645,7 @@
         ],
         "requestBody": {
           "required": true,
+          "description": "# Description of request parameters:\n\n**avatar** - string, user's avatar.\n",
           "content": {
             "multipart/form-data": {
               "schema": {
@@ -564,7 +665,7 @@
         },
         "responses": {
           "200": {
-            "description": "User`s avatar successfully updated and return",
+            "description": "User`s avatar updated and returned\n\nDescription of response parameters:\n\n**avatar** - string, user's avatar.\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -607,7 +708,7 @@
         ],
         "summary": "Get current user information",
         "operationId": "UsersController_getUserInfo",
-        "description": "Get and return current user information",
+        "description": "Get and return current user's data from database\n",
         "security": [
           {
             "bearerAuth": []
@@ -615,7 +716,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Logged user returned",
+            "description": "Logged user returned\n\nDescription of response parameters:\n\n**_id** - ObjectId, unique user ID.\n\n**name** - string, user's name.\n\n**email** - string, user's email.\n\n**gender** - string, user's gender.\n\n**avatar** - string, user's avatar.\n\n**waterRate** - string, user's daily norm of water.\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -648,6 +749,7 @@
         ],
         "requestBody": {
           "required": true,
+          "description": "# Description of request parameters:\n\n**waterRate** - number, User's daily norm of water.\n",
           "content": {
             "application/json": {
               "schema": {
@@ -750,12 +852,15 @@
         ],
         "properties": {
           "percentOfWaterRate": {
+            "description": "Percentage of water drunk to the daily rate of water ",
             "type": "string",
             "example": "11%"
           },
           "todayWaterList": {
+            "description": "list of water records by today",
             "type": "array",
             "items": {
+              "description": "Water record",
               "type": "object",
               "$ref": "#/components/schemas/water"
             }
@@ -765,6 +870,7 @@
       "monthlyWaterRecords": {
         "type": "array",
         "items": {
+          "description": "Daily statistics about consumer water",
           "type": "object",
           "required": [
             "date",
@@ -774,18 +880,22 @@
           ],
           "properties": {
             "date": {
+              "description": "Date of month",
               "type": "string",
               "example": "27, August"
             },
             "waterRate": {
+              "description": "User's daily norm of water",
               "type": "string",
               "example": "1.8 L"
             },
             "percentOfWaterRate": {
+              "description": "Percentage of water drunk to the daily rate of water by date",
               "type": "string",
               "example": "28%"
             },
             "amountOfRecords": {
+              "description": "Amount of water records by date",
               "type": "number",
               "example": 5
             }
@@ -800,12 +910,14 @@
         ],
         "properties": {
           "user": {
+            "description": "Object with user's email",
             "type": "object",
             "required": [
               "email"
             ],
             "properties": {
               "email": {
+                "description": "User's email",
                 "type": "string",
                 "format": "email",
                 "example": "Harley.Gleason@gmail.com"
@@ -813,6 +925,26 @@
             }
           },
           "token": {
+            "description": "User's token",
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzaWQiOiIyOWI4ZmZmNS0xN2NjLTQ5NTYtOTViZC1jN2U3N2FkZDEwOWEiLCJpYXQiOjE2ODE4OTM3MzEsImV4cCI6MTAwMDAwMDE2ODE4OTM3MzJ9.hQpNKIj4SR7Gm9waUMn7hzwKQyqwKrniL_qSW7Sx"
+          }
+        }
+      },
+      "resetPassword": {
+        "type": "object",
+        "required": [
+          "password",
+          "token"
+        ],
+        "properties": {
+          "password": {
+            "description": "User's password",
+            "type": "string",
+            "example": "pasword89"
+          },
+          "token": {
+            "description": "User's token",
             "type": "string",
             "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzaWQiOiIyOWI4ZmZmNS0xN2NjLTQ5NTYtOTViZC1jN2U3N2FkZDEwOWEiLCJpYXQiOjE2ODE4OTM3MzEsImV4cCI6MTAwMDAwMDE2ODE4OTM3MzJ9.hQpNKIj4SR7Gm9waUMn7hzwKQyqwKrniL_qSW7Sx"
           }

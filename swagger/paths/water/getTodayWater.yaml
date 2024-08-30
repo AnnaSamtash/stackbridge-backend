@@ -2,12 +2,28 @@ tags:
   - Water
 summary: Get all water records for today
 operationId: WaterController_getTodayWaterRecords
-description: 'Get all water records for today'
+description: |
+  Get and return all water records for today
+
 security:
   - bearerAuth: []
 responses:
   '200':
-    description: 'Successfully got all water records for today'
+    description: |
+      Got and returned all water records for today
+
+      Description of response parameters:
+
+      Return array of objects, each of which includes these properties:
+
+      **_id** - ObjectId, unique water record ID.
+
+      **amount** - number, amount of water in record.
+
+      **time** - string, time of water record.
+
+      **serId** - ObjectId, unique user ID.
+
     content:
       application/json:
         schema:

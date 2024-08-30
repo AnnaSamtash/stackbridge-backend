@@ -1,5 +1,6 @@
 type: array
 items:
+  description: 'Daily statistics about consumer water'
   type: object
   required:
     - date
@@ -8,14 +9,18 @@ items:
     - amountOfRecords
   properties:
     date:
+      description: 'Date of month'
       type: string
       example: '27, August'
     waterRate:
+      description: "User's daily norm of water"
       type: string
       example: '1.8 L'
     percentOfWaterRate:
+      description: 'Percentage of water drunk to the daily rate of water by date'
       type: string
       example: '28%'
     amountOfRecords:
+      description: 'Amount of water records by date'
       type: number
       example: 5

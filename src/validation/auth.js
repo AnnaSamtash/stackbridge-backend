@@ -11,3 +11,20 @@ export const createUserSchema = Joi.object({
     'any.required': 'Password is a required field',
   }),
 });
+
+export const requestResetEmailSchema = Joi.object({
+  email: Joi.string().email().required().messages({
+    'string.email': 'Invalid email format',
+    'any.required': 'Email is a required field',
+  }),
+});
+
+export const resetPasswordSchema = Joi.object({
+  password: Joi.string().required().messages({
+    'any.required': 'Password is a required field',
+  }),
+  token: Joi.string().required().messages({
+    'string.base': 'Token must be a string',
+    'any.required': 'Token is a required field',
+  }),
+});

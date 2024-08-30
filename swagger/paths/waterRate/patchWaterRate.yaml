@@ -7,6 +7,11 @@ security:
   - bearerAuth: []
 requestBody:
   required: true
+  description: |
+    # Description of request parameters:
+
+    **waterRate** - number, User's daily norm of water.
+
   content:
     application/json:
       schema:
