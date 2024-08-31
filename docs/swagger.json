@@ -447,7 +447,7 @@
         }
       }
     },
-    "/auth/send-reset-email": {
+    "/auth/forgot-password": {
       "post": {
         "tags": [
           "Auth"
@@ -497,7 +497,7 @@
         }
       }
     },
-    "/auth/reset-password": {
+    "/auth/update-password": {
       "post": {
         "tags": [
           "Auth"
@@ -555,7 +555,6 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "# Description of request parameters:\n\n**name** - string, user's name.\n\n**email** - string, user's email.\n\n**gender** - string, user's gender.\n\n**waterRate** - number, user's daily norm of water.\n\n**avatar** - string, user's avatar.\n\n**password** - string, user's password.\n",
           "content": {
             "multipart/form-data": {
               "schema": {
@@ -645,7 +644,6 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "# Description of request parameters:\n\n**avatar** - string, user's avatar.\n",
           "content": {
             "multipart/form-data": {
               "schema": {

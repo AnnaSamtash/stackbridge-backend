@@ -63,7 +63,7 @@ export const requestResetTokenService = async (email) => {
   const template = Handlebars.compile(templateSource);
   const html = template({
     name: user.name,
-    link: `${env('APP_DOMAIN')}/auth/reset-password?token=${resetToken}`,
+    link: `https://stack-bridge.vercel.app/update-password?token=${resetToken}`,
   });
   try {
     await sendEmail({
