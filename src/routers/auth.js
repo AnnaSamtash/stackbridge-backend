@@ -28,13 +28,13 @@ router.post('/signin', validateBody(createUserSchema), ctrlWrapper(loginUser));
 router.post('/logout', checkToken, ctrlWrapper(logout));
 
 router.post(
-  '/send-reset-email',
+  '/forgot-password',
   validateBody(requestResetEmailSchema),
   ctrlWrapper(requestResetEmail),
 );
 
 router.post(
-  '/reset-password',
+  '/update-password',
   validateBody(resetPasswordSchema),
   ctrlWrapper(resetPassword),
 );

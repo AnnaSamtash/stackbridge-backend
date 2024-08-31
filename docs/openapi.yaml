@@ -94,10 +94,10 @@ paths:
   /auth/logout:
     post:
       $ref: ../swagger/paths/auth/logout.yaml
-  /auth/send-reset-email:
+  /auth/forgot-password:
     post:
       $ref: ../swagger/paths/auth/resetEmail.yaml
-  /auth/reset-password:
+  /auth/update-password:
     post:
       $ref: ../swagger/paths/auth/resetPassword.yaml
   /users:
