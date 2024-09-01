@@ -31,7 +31,7 @@ responses:
 
       **date** - string, date of month.
 
-      **waterRate** - number, user's daily norm of water.
+      **waterRate** - number, user's daily water consumption rate.
 
       **percentOfWaterRate** - string, percentage of water drunk to the
       daily rate of water by date'.

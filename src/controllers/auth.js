@@ -18,7 +18,12 @@ export const registerUser = async (req, res) => {
   const newUser = await createUserService(req.body);
   res.status(201).json({
     user: {
+      _id: newUser._id,
+      name: newUser.name,
       email: newUser.email,
+      gender: newUser.gender,
+      avatar: newUser.avatar,
+      waterRate: newUser.waterRate,
     },
     token: newUser.token,
   });
@@ -38,7 +43,12 @@ export const loginUser = async (req, res) => {
 
   res.status(200).json({
     user: {
+      _id: updatedUser._id,
+      name: updatedUser.name,
       email: updatedUser.email,
+      gender: updatedUser.gender,
+      avatar: updatedUser.avatar,
+      waterRate: updatedUser.waterRate,
     },
     token: updatedUser.token,
   });

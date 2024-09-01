@@ -17,7 +17,7 @@ items:
       type: string
       example: '1.8 L'
     percentOfWaterRate:
-      description: 'Percentage of water drunk to the daily rate of water by date'
+      description: 'Percentage of water drunk to the daily water rate by date'
       type: string
       example: '28%'
     amountOfRecords:

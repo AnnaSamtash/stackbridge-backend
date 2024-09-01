@@ -42,11 +42,23 @@ responses:
 
       Description of response parameters:
 
-      **user** - object, includes user's email.
-
       **token** - string, token is used to store the authorization state
-      of the user in the system, which allows users to make secure requests
-      to the API.
+        of the user in the system, which allows users to make secure requests
+        to the API.
+
+      **user** - object, includes these properties:
+
+        **_id** - ObjectId, unique user ID.
+
+        **name** - string, user's name.
+
+        **email** - string, user's email.
+
+        **gender** - string, user's gender.
+
+        **avatar** - string, user's avatar.
+
+        **waterRate** - string, user's daily water consumption rate.
 
     content:
       application/json:

@@ -6,41 +6,32 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   description: |-
-    API documentation for project WaterTracker Web App
+    **API documentation for project WaterTracker Web App**
 
-    This project is a web application for managing the amount of water
-      drunk during the day, will calculate a personal daily rate of fluid
-      consumption based on client data, and will also provide statistics
-      on the amount of fluid drunk per day and month. This allows users
-      to adjust their lifestyle and evaluate progress on the path to
-      healing the whole organism.
+    This project is a web application for tracking and managing water intake
+      throughout the day. It calculates an individual daily water consumption
+      rate based on user data and provides statistics for daily and monthly
+      consumption. This helps users adjust their lifestyle and monitor progress
+      toward better health.
 
-    The project provides the ability to register users, their authentication
-      and authorization. In addition, users can create and track their fluid
-      intake, edit their data and records of these intakes, view statistics
-      of their consumption for a certain period of time, and calculate and
-      update the daily rate of fluid intake depending on changes in indicators.
+    The project includes user registration, authentication, and authorization,
+      with the ability to edit personal data and records. The application has a
+      user-friendly interface, ensuring security through password encryption and
+      token-based identification. Also application supports password recovery via email.
 
-    In addition, the application has a friendly and intuitive user interface
-      that allows you to conveniently and quickly perform all the necessary
-      actions. The project also ensures the security of users through password
-      encryption and identification using tokens.
+    **Key Features:**
 
-    **Functionality:**
+    User registration and authorization.
 
-    User registration and authorization
+    Update personal data, avatar, and password.
 
-    Ability to update your data in the application, download the avatar or even
-    change the password in a convenient form
+    Add, edit, and delete water intake records.
 
-    Addition, modification and deletion of records of the amount of consumer
-    fluid with the determination of the time of its reception
+    Calculate and update daily water consumption rate.
 
-    Calculation and updating of the personal daily rate of fluid consumption
-    depending on changes in indicators
+    Display detailed daily and monthly water intake statistics.
 
-    Displaying detailed statistics for the month and for the day about the
-    amount of consumer fluid and percentage of the norm
+    Password recovery via email.
 
     **Technology stack used in the project:**
 
@@ -50,13 +41,8 @@ info:
 
     MongoDB - NoSQL Database
 
-    Node.js - JavaScript server runtime
-
-    Express.js - framework for developing web applications on Node.js
-
-    MongoDB - NoSQL Database
-
     Mongoose - library for working with MongoDB in Node.js
+
   contact:
     email: annasamtash@gmail.com
 tags:

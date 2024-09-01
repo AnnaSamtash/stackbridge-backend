@@ -4,7 +4,7 @@ required:
   - todayWaterList
 properties:
   percentOfWaterRate:
-    description: 'Percentage of water drunk to the daily rate of water '
+    description: 'Percentage of water drunk to the daily water rate '
     type: string
     example: '11%'
   todayWaterList:

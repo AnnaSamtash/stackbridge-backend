@@ -24,7 +24,7 @@ responses:
 
       **avatar** - string, user's avatar.
 
-      **waterRate** - string, user's daily norm of water.
+      **waterRate** - string, user's daily water consumption rate.
 
     content:
       application/json:

@@ -6,14 +6,7 @@ properties:
   user:
     description: "Object with user's email"
     type: object
-    required:
-      - email
-    properties:
-      email:
-        description: "User's email"
-        type: string
-        format: email
-        example: 'Harley.Gleason@gmail.com'
+    $ref: user.yaml
   token:
     description: "User's token"
     type: string
