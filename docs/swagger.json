@@ -7,7 +7,7 @@
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "description": "**API documentation for project WaterTracker Web App**\n\nThis project is a web application for tracking and managing water intake\n  throughout the day. It calculates an individual daily water consumption\n  rate based on user data and provides statistics for daily and monthly\n  consumption. This helps users adjust their lifestyle and monitor progress\n  toward better health.\n\nThe project includes user registration, authentication, and authorization,\n  with the ability to edit personal data and records. The application has a\n  user-friendly interface, ensuring security through password encryption and\n  token-based identification, and supports password recovery via email.\n\n**Key Features:**\n\nUser registration and authorization.\n\nUpdate personal data, avatar, and password.\n\nAdd, edit, and delete water intake records.\n\nCalculate and update daily water consumption rate.\n\nDisplay detailed daily and monthly water intake statistics.\n\nPassword recovery via email.\n\n**Technology stack used in the project:**\n\nNode.js - JavaScript server runtime\n\nExpress.js - framework for developing web applications on Node.js\n\nMongoDB - NoSQL Database\n\nMongoose - library for working with MongoDB in Node.js",
+    "description": "**API documentation for project WaterTracker Web App**\n\nThis project is a web application for tracking and managing water intake\n  throughout the day. It calculates an individual daily water consumption\n  rate based on user data and provides statistics for daily and monthly\n  consumption. This helps users adjust their lifestyle and monitor progress\n  toward better health.\n\nThe project includes user registration, authentication, and authorization,\n  with the ability to edit personal data and records. The application has a\n  user-friendly interface, ensuring security through password encryption and\n  token-based identification. Also application supports password recovery via email.\n\n**Key Features:**\n\nUser registration and authorization.\n\nUpdate personal data, avatar, and password.\n\nAdd, edit, and delete water intake records.\n\nCalculate and update daily water consumption rate.\n\nDisplay detailed daily and monthly water intake statistics.\n\nPassword recovery via email.\n\n**Technology stack used in the project:**\n\nNode.js - JavaScript server runtime\n\nExpress.js - framework for developing web applications on Node.js\n\nMongoDB - NoSQL Database\n\nMongoose - library for working with MongoDB in Node.js",
     "contact": {
       "email": "annasamtash@gmail.com"
     }
@@ -341,7 +341,7 @@
         },
         "responses": {
           "201": {
-            "description": "New User Registered\n\nDescription of response parameters:\n\n**user** - object, includes these properties:\n\n  **_id** - ObjectId, unique user ID.\n\n  **name** - string, user's name.\n\n  **email** - string, user's email.\n\n  **gender** - string, user's gender.\n\n  **avatar** - string, user's avatar.\n\n  **waterRate** - string, user's daily water consumption rate.\n\n**token** - string, token is used to store the authorization state\nof the user in the system, which allows users to make secure requests\nto the API.\n",
+            "description": "New User Registered\n\nDescription of response parameters:\n\n**token** - string, token is used to store the authorization state\n  of the user in the system, which allows users to make secure requests\n  to the API.\n\n**user** - object, includes these properties:\n\n  **_id** - ObjectId, unique user ID.\n\n  **name** - string, user's name.\n\n  **email** - string, user's email.\n\n  **gender** - string, user's gender.\n\n  **avatar** - string, user's avatar.\n\n  **waterRate** - string, user's daily water consumption rate.\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -397,7 +397,7 @@
         },
         "responses": {
           "200": {
-            "description": "Sign in existing user\n\nDescription of response parameters:\n\n**user** - object, includes these properties:\n\n  **_id** - ObjectId, unique user ID.\n\n  **name** - string, user's name.\n\n  **email** - string, user's email.\n\n  **gender** - string, user's gender.\n\n  **avatar** - string, user's avatar.\n\n  **waterRate** - string, user's daily water consumption rate.\n\n**token** - string, token is used to store the authorization state\nof the user in the system, which allows users to make secure requests\nto the API.\n",
+            "description": "Sign in existing user\n\nDescription of response parameters:\n\n**token** - string, token is used to store the authorization state\n  of the user in the system, which allows users to make secure requests\n  to the API.\n\n**user** - object, includes these properties:\n\n  **_id** - ObjectId, unique user ID.\n\n  **name** - string, user's name.\n\n  **email** - string, user's email.\n\n  **gender** - string, user's gender.\n\n  **avatar** - string, user's avatar.\n\n  **waterRate** - string, user's daily water consumption rate.\n",
             "content": {
               "application/json": {
                 "schema": {

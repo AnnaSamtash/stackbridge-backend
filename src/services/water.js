@@ -42,6 +42,8 @@ export const getMonthlyWaterService = async (userId, year, month) => {
     .utc()
     .toDate();
 
+  console.log(start, end);
+
   const [monthlyWater, user] = await Promise.all([
     Water.find({ userId, time: { $gte: start, $lte: end } }).lean(),
     User.findById(userId).lean(),
@@ -69,7 +71,7 @@ export const getMonthlyWaterService = async (userId, year, month) => {
     );
 
     return {
-      date: `${date}, ${moment(start + 1).format('MMMM')}`,
+      date: `${date}, ${moment(end).format('MMMM')}`,
       waterRate: `${(waterRate / 1000).toFixed(1)} L`,
       percentOfWaterRate: `${percentOfWaterRate}%`,
       amountOfRecords: count,
