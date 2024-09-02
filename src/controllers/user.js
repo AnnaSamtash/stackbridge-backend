@@ -4,6 +4,7 @@ import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
 import { saveFileToUploadDir } from '../utils/saveFileToUploadDir.js';
 import { findUserByIdService, updateUserService } from '../services/user.js';
 import { findUserByEmailService } from '../services/auth.js';
+import bcrypt from 'bcrypt';
 
 export const updateUserAvatar = async (req, res) => {
   const userId = req.user._id;
@@ -49,12 +50,29 @@ export const getUserInfo = async (req, res) => {
 export const updateUser = async (req, res) => {
   const userId = req.user._id;
   const avatar = req.file;
-  const { email } = req.body;
+  const { email, password, newPassword } = req.body;
 
-  const user = await findUserByEmailService(email);
+  if (req.user.email !== email) {
+    const user = await findUserByEmailService(email);
 
-  if (user) {
-    throw createHttpError(409, 'Email in use');
+    if (user) {
+      throw createHttpError(409, 'Email in use');
+    }
+  }
+
+  if (password) {
+    const isEqual = await bcrypt.compare(password, req.user.password);
+    if (!isEqual) {
+      throw createHttpError(401, 'Unauthorized');
+    }
+    if (newPassword) {
+      req.body.password = await bcrypt.hash(newPassword, 10);
+    } else {
+      throw createHttpError(400, 'Missed new password');
+    }
+  }
+  if (!password && newPassword) {
+    throw createHttpError(401, 'Unauthorized');
   }
 
   let avatarUrl;

@@ -13,6 +13,10 @@ export const updateUserSchema = Joi.object({
     'string.min': 'Password must be at least 8 characters long',
     'string.max': 'Password must be at most 64 characters long',
   }),
+  newPassword: Joi.string().min(8).max(64).messages({
+    'string.min': 'Password must be at least 8 characters long',
+    'string.max': 'Password must be at most 64 characters long',
+  }),
   gender: Joi.string().valid('woman', 'man').default('woman'),
   avatar: Joi.string().allow('').default(null),
   waterRate: Joi.number().default(2000),

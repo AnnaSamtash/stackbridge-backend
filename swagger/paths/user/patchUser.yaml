@@ -42,7 +42,11 @@ requestBody:
           password:
             description: "User's password"
             type: string
-            example: 'pasword89'
+            example: 'password89'
+          newPassword:
+            description: "User's new password"
+            type: string
+            example: 'password89'
 responses:
   '200':
     description: |

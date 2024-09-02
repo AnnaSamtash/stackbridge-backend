@@ -42,8 +42,6 @@ export const getMonthlyWaterService = async (userId, year, month) => {
     .utc()
     .toDate();
 
-  console.log(start, end);
-
   const [monthlyWater, user] = await Promise.all([
     Water.find({ userId, time: { $gte: start, $lte: end } }).lean(),
     User.findById(userId).lean(),

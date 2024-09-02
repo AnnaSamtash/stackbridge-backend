@@ -15,6 +15,9 @@
   "servers": [
     {
       "url": "https://watertracker-app.onrender.com"
+    },
+    {
+      "url": "http://localhost:3000"
     }
   ],
   "tags": [
@@ -593,7 +596,12 @@
                   "password": {
                     "description": "User's password",
                     "type": "string",
-                    "example": "pasword89"
+                    "example": "password89"
+                  },
+                  "newPassword": {
+                    "description": "User's new password",
+                    "type": "string",
+                    "example": "password89"
                   }
                 }
               }
@@ -1019,7 +1027,7 @@
                   "properties": {
                     "message": {
                       "type": "string",
-                      "example": "BadRequestError"
+                      "example": "Missed new password"
                     }
                   }
                 }
