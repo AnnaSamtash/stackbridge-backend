@@ -48,8 +48,6 @@ responses:
 
       **user** - object, includes these properties:
 
-        **_id** - ObjectId, unique user ID.
-
         **name** - string, user's name.
 
         **email** - string, user's email.

@@ -35,10 +35,6 @@ requestBody:
             default: null
             format: binary
             example: <https://res.cloudinary.com/dartenrtb/image/upload/v1724914466/waterTracker/ibt3icvvc6hpborulsjb.png>
-          waterRate:
-            description: "User's daily water consumption rate"
-            type: number
-            default: 2000
           password:
             description: "User's password"
             type: string
@@ -53,8 +49,6 @@ responses:
       User's data updated and returned
 
       Description of response parameters:
-
-      **_id** - ObjectId, unique user ID.
 
       **name** - string, user's name.
 

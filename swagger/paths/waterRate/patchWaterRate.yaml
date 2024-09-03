@@ -2,7 +2,7 @@ tags:
   - WaterRate
 summary: Change user's waterRate
 operationId: WaterRateController_updateWaterRate
-description: 'Change and return user`s daily norm of water'
+description: 'Change and return user`s daily water rate'
 security:
   - bearerAuth: []
 requestBody:
@@ -10,7 +10,7 @@ requestBody:
   description: |
     # Description of request parameters:
 
-    **waterRate** - number, User's daily norm of water.
+    **waterRate** - number, User's daily water rate.
 
   content:
     application/json:
@@ -20,7 +20,7 @@ requestBody:
           - waterRate
         properties:
           waterRate:
-            description: "User's daily norm of water"
+            description: "User's daily water rate"
             type: number
             default: 2000
 responses:
@@ -34,7 +34,7 @@ responses:
             - waterRate
           properties:
             waterRate:
-              description: "User's daily norm of water"
+              description: "User's daily water rate"
               type: number
               default: 2000
   '400':

@@ -14,8 +14,6 @@ responses:
 
       Description of response parameters:
 
-      **_id** - ObjectId, unique user ID.
-
       **name** - string, user's name.
 
       **email** - string, user's email.

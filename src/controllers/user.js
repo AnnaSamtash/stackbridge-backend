@@ -38,7 +38,6 @@ export const getUserInfo = async (req, res) => {
   const user = await findUserByIdService(userId);
 
   res.status(200).json({
-    _id: user._id,
     name: user.name,
     email: user.email,
     gender: user.gender,
@@ -95,7 +94,6 @@ export const updateUser = async (req, res) => {
   }
 
   res.status(200).json({
-    _id: updatedUser._id,
     name: updatedUser.name,
     email: updatedUser.email,
     gender: updatedUser.gender,
