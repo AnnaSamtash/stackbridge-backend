@@ -1,4 +1,5 @@
-description: Not Found error
+description: |
+  Validation error
 content:
   application/json:
     schema:
@@ -10,10 +11,10 @@ content:
       properties:
         status:
           type: integer
-          example: 404
+          example: 400
         message:
           type: string
-          example: Not Found error
+          example: 'BadRequestError'
         data:
           type: object
           required:
@@ -21,4 +22,4 @@ content:
           properties:
             message:
               type: string
-              example: 'User not found'
+              example: 'Bad Request'

@@ -1,12 +1,12 @@
 import { model, Schema } from 'mongoose';
 
-const waterSchema = new Schema(
+const waterNoteSchema = new Schema(
   {
-    amount: {
+    waterVolume: {
       type: Number,
       required: true,
     },
-    time: {
+    date: {
       type: Date,
       required: true,
     },
@@ -16,10 +16,10 @@ const waterSchema = new Schema(
     },
   },
   {
-    timestamps: true,
+    timestamps: false,
     versionKey: false,
   },
 );
 
-const Water = model('water', waterSchema);
-export default Water;
+const WaterNote = model('water', waterNoteSchema);
+export default WaterNote;

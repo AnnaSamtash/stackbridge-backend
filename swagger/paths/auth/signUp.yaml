@@ -13,10 +13,10 @@ requestBody:
 
     # Description of request parameters:
 
-    **email** - string, user's email.
+    **email** - string, user's email. Field must contain a valid email.
     **Required parameter**
 
-    **password** - string, user's password.
+    **password** - string, user's password. Field must contain at least 8 characters, maximum 64.
     **Required parameter**
 
   content:
@@ -63,6 +63,6 @@ responses:
         schema:
           $ref: '../../components/schemas/userWithTokenResponse.yaml'
   '409':
-    $ref: '../../components/responses/409.yaml'
-  '500':
-    $ref: '../../components/responses/500.yaml'
+    $ref: '../../components/responses/ConflictError_409.yaml'
+  '400':
+    $ref: '../../components/responses/ValidationError_400.yaml'

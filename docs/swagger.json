@@ -7,7 +7,7 @@
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "description": "**API documentation for project WaterTracker Web App**\n\nThis project is a web application for tracking and managing water intake\n  throughout the day. It calculates an individual daily water consumption\n  rate based on user data and provides statistics for daily and monthly\n  consumption. This helps users adjust their lifestyle and monitor progress\n  toward better health.\n\nThe project includes user registration, authentication, and authorization,\n  with the ability to edit personal data and records. The application has a\n  user-friendly interface, ensuring security through password encryption and\n  token-based identification. Also application supports password recovery via email.\n\n**Key Features:**\n\nUser registration and authorization.\n\nUpdate personal data, avatar, and password.\n\nAdd, edit, and delete water intake records.\n\nCalculate and update daily water consumption rate.\n\nDisplay detailed daily and monthly water intake statistics.\n\nPassword recovery via email.\n\n**Technology stack used in the project:**\n\nNode.js - JavaScript server runtime\n\nExpress.js - framework for developing web applications on Node.js\n\nMongoDB - NoSQL Database\n\nMongoose - library for working with MongoDB in Node.js",
+    "description": "**API documentation for project WaterTracker Web App**\n\nThis project is a web application for tracking and managing water intake|\n  throughout the day. It calculates an individual daily water consumption|\n  rate based on user data and provides statistics for daily and monthly|\n  consumption. This helps users adjust their lifestyle and monitor progress|\n  toward better health.\n\nThe project includes user registration, authentication, and authorization,|\n  with the ability to edit personal data and records. The application has a|\n  user-friendly interface, ensuring security through password encryption and|\n  token-based identification. Also application supports password recovery via|\n  email.\n\n**Key Features:**\n\nUser registration and authorization.\n\nUpdate personal data, avatar, and password.\n\nAdd, edit, and delete water intake records.\n\nCalculate and update daily water consumption rate.\n\nDisplay detailed daily and monthly water intake statistics.\n\nPassword recovery via email.\n\n**Technology stack used in the project:**\n\nNode.js - JavaScript server runtime\n\nExpress.js - framework for developing web applications on Node.js\n\nMongoDB - NoSQL Database\n\nMongoose - library for working with MongoDB in Node.js",
     "contact": {
       "email": "annasamtash@gmail.com"
     }
@@ -34,19 +34,19 @@
       "description": "Operations about waterRate."
     },
     {
-      "name": "Water",
-      "description": "Operations about water record."
+      "name": "WaterNotes",
+      "description": "Operations about water note."
     }
   ],
   "paths": {
-    "/water": {
+    "/waterNotes": {
       "post": {
         "tags": [
-          "Water"
+          "WaterNotes"
         ],
-        "summary": "Create a water record",
-        "operationId": "WaterController_createWaterRecord",
-        "description": "Create a water record in the database and return it\n",
+        "summary": "Create a water note",
+        "operationId": "WaterNoteController_createWaterNote",
+        "description": "Create a water note in the database and return it\n",
         "security": [
           {
             "bearerAuth": []
@@ -54,23 +54,23 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "# Description of request parameters:\n\n**amount** - number, Amount of water in record.\n**Required parameter**\n\n**time** - string, Time of water record.\n**Required parameter**\n",
+          "description": "# Description of request parameters:\n\n**waterVolume** - number, amount of water in note. Field must contain min 1, max 5000.\n**Required parameter**\n\n**date** - string, date of water note. Field must contain a valid date with a specified time in it.\n**Required parameter**\n",
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "required": [
-                  "amount",
-                  "time"
+                  "waterVolume",
+                  "date"
                 ],
                 "properties": {
-                  "amount": {
-                    "description": "Amount of water in record",
+                  "waterVolume": {
+                    "description": "Amount of water in note",
                     "type": "number",
                     "example": 250
                   },
-                  "time": {
-                    "description": "Time of water record",
+                  "date": {
+                    "description": "Date of water note",
                     "type": "string",
                     "example": "2024-08-29 05:30 AM"
                   }
@@ -81,35 +81,32 @@
         },
         "responses": {
           "201": {
-            "description": "Water record created and returned\n\nDescription of response parameters:\n\n**_id** - ObjectId, unique water record ID.\n\n**amount** - number, amount of water in record.\n\n**time** - string, time of water record.\n\n**serId** - ObjectId, unique user ID.\n",
+            "description": "Water note created and returned\n\nDescription of response parameters:\n\n**_id** - ObjectId, unique water note ID.\n\n**waterVolume** - number, amount of water in note.\n\n**date** - string, date of water note.\n\n**userId** - ObjectId, unique user ID.\n",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/water"
+                  "$ref": "#/components/schemas/waterNoteResponse"
                 }
               }
             }
           },
           "400": {
-            "$ref": "#/components/responses/400"
+            "$ref": "#/components/responses/ValidationError_400"
           },
           "401": {
-            "$ref": "#/components/responses/401"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
+            "$ref": "#/components/responses/UnauthorizedError_401"
           }
         }
       }
     },
-    "/water/{id}": {
+    "/waterNotes/{id}": {
       "delete": {
         "tags": [
-          "Water"
+          "WaterNotes"
         ],
-        "summary": "Delete a water record",
-        "operationId": "WaterController_deleteWaterRecord",
-        "description": "Delete a water record\n",
+        "summary": "Delete a water note",
+        "operationId": "WaterNoteController_deleteWaterNote",
+        "description": "Delete a water note\n",
         "security": [
           {
             "bearerAuth": []
@@ -128,26 +125,57 @@
         ],
         "responses": {
           "204": {
-            "description": "Water record by id deleted\n"
+            "description": "Water note by id deleted\n"
           },
           "401": {
-            "$ref": "#/components/responses/401"
+            "$ref": "#/components/responses/UnauthorizedError_401"
           },
           "404": {
-            "$ref": "#/components/responses/404"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
+            "description": "Not Found error - Water note with id not found or Invalid ID format",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "NotFoundError"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "message"
+                      ],
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Water note with id not found or Invalid ID format"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
       "patch": {
         "tags": [
-          "Water"
+          "WaterNotes"
         ],
-        "summary": "Update a water record",
-        "operationId": "WaterController_updateWaterRecord",
-        "description": "Update and return a water record\n",
+        "summary": "Update a water note",
+        "operationId": "WaterNoteController_updateWaterNote",
+        "description": "Update and return a water note\n",
         "security": [
           {
             "bearerAuth": []
@@ -166,23 +194,23 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "# Description of request parameters:\n\n**amount** - number, amount of water in record.\n\n**time** - string, time of water record.\n",
+          "description": "# Description of request parameters:\n\n**waterVolume** - number, amount of water in note. Field must contain min 1, max 5000.\n\n**date** - string, date of water note. Field must contain a valid date with a specified time in it.\n",
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "required": [
-                  "amount",
-                  "time"
+                  "waterVolume",
+                  "date"
                 ],
                 "properties": {
-                  "amount": {
-                    "description": "Amount of water in record",
+                  "waterVolume": {
+                    "description": "Amount of water in note",
                     "type": "number",
                     "example": 250
                   },
-                  "time": {
-                    "description": "Time of water record",
+                  "date": {
+                    "description": "Date of water note",
                     "type": "string",
                     "example": "2024-08-29 05:30 AM"
                   }
@@ -193,35 +221,66 @@
         },
         "responses": {
           "200": {
-            "description": "Water record updated by id and returned\n\nDescription of response parameters:\n\n**_id** - ObjectId, unique water record ID.\n\n**amount** - number, amount of water in record.\n\n**time** - string, time of water record.\n\n**serId** - ObjectId, unique user ID.\n",
+            "description": "Water note updated by id and returned\n\nDescription of response parameters:\n\n**_id** - ObjectId, unique water note ID.\n\n**waterVolume** - number, amount of water in note.\n\n**date** - string, date of water note.\n\n**userId** - ObjectId, unique user ID.\n",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/water"
+                  "$ref": "#/components/schemas/waterNoteResponse"
                 }
               }
             }
           },
           "401": {
-            "$ref": "#/components/responses/401"
+            "$ref": "#/components/responses/UnauthorizedError_401"
           },
           "404": {
-            "$ref": "#/components/responses/404"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
+            "description": "Not Found error - Water note with id not found or Invalid ID format",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "NotFoundError"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "message"
+                      ],
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Water note with id not found or Invalid ID format"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
-    "/water/today": {
+    "/waterNotes/today": {
       "get": {
         "tags": [
-          "Water"
+          "WaterNotes"
         ],
-        "summary": "Get all water records for today",
-        "operationId": "WaterController_getTodayWaterRecords",
-        "description": "Get and return all water records for today\n",
+        "summary": "Get all water notes for today",
+        "operationId": "WaterNoteController_getTodayWaterNotes",
+        "description": "Get and return all water notes for today\n",
         "security": [
           {
             "bearerAuth": []
@@ -229,35 +288,66 @@
         ],
         "responses": {
           "200": {
-            "description": "Got and returned all water records for today\n\nDescription of response parameters:\n\nReturn array of objects, each of which includes these properties:\n\n**_id** - ObjectId, unique water record ID.\n\n**amount** - number, amount of water in record.\n\n**time** - string, time of water record.\n\n**serId** - ObjectId, unique user ID.\n",
+            "description": "Got and returned all water notes for today\n\nDescription of response parameters:\n\nReturn array of objects, each of which includes these properties:\n\n**_id** - ObjectId, unique water note ID.\n\n** waterVolume** - number, amount of water in note.\n\n**date** - string, date of water note.\n\n**serId** - ObjectId, unique user ID.\n",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/todayWaterRecords"
+                  "$ref": "#/components/schemas/todayWaterNotes"
                 }
               }
             }
           },
           "401": {
-            "$ref": "#/components/responses/401"
+            "$ref": "#/components/responses/UnauthorizedError_401"
           },
           "404": {
-            "$ref": "#/components/responses/404"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
+            "description": "Not Found error - Water notes or user not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "NotFoundError"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "message"
+                      ],
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Water notes or user not found"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
-    "/water/{year}/{month}": {
+    "/waterNotes/{year}/{month}": {
       "get": {
         "tags": [
-          "Water"
+          "WaterNotes"
         ],
-        "summary": "Get all water records for month",
-        "operationId": "WaterController_getMonthlyWaterRecords",
-        "description": "Get and return all water records for month\n",
+        "summary": "Get all water notes for month",
+        "operationId": "WaterNoteController_getMonthlyWaterNotes",
+        "description": "Get and return all water notes for month\n",
         "security": [
           {
             "bearerAuth": []
@@ -285,23 +375,54 @@
         ],
         "responses": {
           "200": {
-            "description": "Got and returned all water records for month\n\nDescription of response parameters:\n\nReturn array of objects, each of which includes these properties:\n\n**date** - string, date of month.\n\n**waterRate** - number, user's daily water consumption rate.\n\n**percentOfWaterRate** - string, percentage of water drunk to the\ndaily rate of water by date'.\n\n**amountOfRecords** - number, amount of water records by date.\n",
+            "description": "Got and returned all water notes for month\n\nDescription of response parameters:\n\nReturn array of objects, each of which includes these properties:\n\n**date** - string, date of month.\n\n**waterRate** - number, user's daily water consumption rate.\n\n**percentOfWaterRate** - string, percentage of water drunk to the\ndaily rate of water by date'.\n\n**amountOfRecords** - number, amount of water notes by date.\n",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/monthlyWaterRecords"
+                  "$ref": "#/components/schemas/monthlyWaterNotes"
                 }
               }
             }
           },
           "401": {
-            "$ref": "#/components/responses/401"
+            "$ref": "#/components/responses/UnauthorizedError_401"
           },
           "404": {
-            "$ref": "#/components/responses/404"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
+            "description": "Not Found error - Water notes or user not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "NotFoundError"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "message"
+                      ],
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Water notes or user not found"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -317,7 +438,7 @@
         "security": [],
         "requestBody": {
           "required": true,
-          "description": "New User Registered\n\n# Description of request parameters:\n\n**email** - string, user's email.\n**Required parameter**\n\n**password** - string, user's password.\n**Required parameter**\n",
+          "description": "New User Registered\n\n# Description of request parameters:\n\n**email** - string, user's email. Field must contain a valid email.\n**Required parameter**\n\n**password** - string, user's password. Field must contain at least 8 characters, maximum 64.\n**Required parameter**\n",
           "content": {
             "application/json": {
               "schema": {
@@ -344,7 +465,7 @@
         },
         "responses": {
           "201": {
-            "description": "New User Registered\n\nDescription of response parameters:\n\n**token** - string, token is used to store the authorization state\n  of the user in the system, which allows users to make secure requests\n  to the API.\n\n**user** - object, includes these properties:\n\n  **_id** - ObjectId, unique user ID.\n\n  **name** - string, user's name.\n\n  **email** - string, user's email.\n\n  **gender** - string, user's gender.\n\n  **avatar** - string, user's avatar.\n\n  **waterRate** - string, user's daily water consumption rate.\n",
+            "description": "New User Registered\n\nDescription of response parameters:\n\n**token** - string, token is used to store the authorization state\n  of the user in the system, which allows users to make secure requests\n  to the API.\n\n**user** - object, includes these properties:\n\n  **name** - string, user's name.\n\n  **email** - string, user's email.\n\n  **gender** - string, user's gender.\n\n  **avatar** - string, user's avatar.\n\n  **waterRate** - string, user's daily water consumption rate.\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -353,11 +474,11 @@
               }
             }
           },
-          "409": {
-            "$ref": "#/components/responses/409"
+          "400": {
+            "$ref": "#/components/responses/ValidationError_400"
           },
-          "500": {
-            "$ref": "#/components/responses/500"
+          "409": {
+            "$ref": "#/components/responses/ConflictError_409"
           }
         }
       }
@@ -373,7 +494,7 @@
         "security": [],
         "requestBody": {
           "required": true,
-          "description": "# Description of request parameters:\n\n**email** - string, user's email.\n**Required parameter**\n\n**password** - string, user's password.\n**Required parameter**\n",
+          "description": "# Description of request parameters:\n\n**email** - string, user's email. Field must contain a valid email.\n**Required parameter**\n\n**password** - string, user's password. Field must contain at least 8 characters, maximum 64.\n**Required parameter**\n",
           "content": {
             "application/json": {
               "schema": {
@@ -400,7 +521,7 @@
         },
         "responses": {
           "200": {
-            "description": "Sign in existing user\n\nDescription of response parameters:\n\n**token** - string, token is used to store the authorization state\n  of the user in the system, which allows users to make secure requests\n  to the API.\n\n**user** - object, includes these properties:\n\n  **_id** - ObjectId, unique user ID.\n\n  **name** - string, user's name.\n\n  **email** - string, user's email.\n\n  **gender** - string, user's gender.\n\n  **avatar** - string, user's avatar.\n\n  **waterRate** - string, user's daily water consumption rate.\n",
+            "description": "Sign in existing user\n\nDescription of response parameters:\n\n**token** - string, token is used to store the authorization state\n  of the user in the system, which allows users to make secure requests\n  to the API.\n\n**user** - object, includes these properties:\n\n  **name** - string, user's name.\n\n  **email** - string, user's email.\n\n  **gender** - string, user's gender.\n\n  **avatar** - string, user's avatar.\n\n  **waterRate** - string, user's daily water consumption rate.\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -409,14 +530,14 @@
               }
             }
           },
+          "400": {
+            "$ref": "#/components/responses/ValidationError_400"
+          },
           "401": {
-            "$ref": "#/components/responses/401"
+            "$ref": "#/components/responses/UnauthorizedError_401"
           },
           "404": {
-            "$ref": "#/components/responses/404"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
+            "$ref": "#/components/responses/NotFoundError_404"
           }
         }
       }
@@ -428,7 +549,7 @@
         ],
         "summary": "Logout a user",
         "operationId": "AuthController_logout",
-        "description": "The logout endpoint is a logout mechanism that destroys the \n  token that was issued during previous authentication.\n\nWhen the user clicks the log out button, he makes a request for a\n  URL/api/auth/logout with a valid token in the Authorization header.\n  The server checks the validity of the token, if the token is valid,\n  then the token is deleted and the user returns to the login page.\n  If the token is not valid, the server returns the 401 status and\n  reports that the token is invalid.\n",
+        "description": "The logout endpoint is a logout mechanism that destroys the\n  token that was issued during previous authentication.\n\nWhen the user clicks the log out button, he makes a request for a\n  URL/api/auth/logout with a valid token in the Authorization header.\n  The server checks the validity of the token, if the token is valid,\n  then the token is deleted and the user returns to the login page.\n  If the token is not valid, the server returns the 401 status and\n  reports that the token is invalid.\n",
         "security": [
           {
             "bearerAuth": []
@@ -436,13 +557,10 @@
         ],
         "responses": {
           "204": {
-            "description": "User successfully logged out\n"
+            "description": "User logged out\n"
           },
           "401": {
-            "$ref": "#/components/responses/401"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
+            "$ref": "#/components/responses/UnauthorizedError_401"
           }
         }
       }
@@ -458,7 +576,7 @@
         "security": [],
         "requestBody": {
           "required": true,
-          "description": "# Description of request parameters:\n\n**email** - string, user's email.\n**Required parameter**\n",
+          "description": "# Description of request parameters:\n\n**email** - string, user's email. Field must contain a valid email.\n**Required parameter**\n",
           "content": {
             "application/json": {
               "schema": {
@@ -489,10 +607,10 @@
             }
           },
           "404": {
-            "$ref": "#/components/responses/404"
+            "$ref": "#/components/responses/NotFoundError_404"
           },
           "500": {
-            "$ref": "#/components/responses/500"
+            "$ref": "#/components/responses/EmailSendError_500"
           }
         }
       }
@@ -508,7 +626,7 @@
         "security": [],
         "requestBody": {
           "required": true,
-          "description": "# Description of request parameters:\n\n**password** - string, user's new password.\n**Required parameter**\n\n**token** - string, token is used to store the authorization\nstate of the user in the system, which allows users to make\nsecure requests to the API.\n**Required parameter**\n",
+          "description": "# Description of request parameters:\n\n**password** - string, user's new password. Field must contain at least 8 characters, maximum 64.\n**Required parameter**\n\n**token** - string, token is used to store the authorization\nstate of the user in the system, which allows users to make\nsecure requests to the API.\n**Required parameter**\n",
           "content": {
             "application/json": {
               "schema": {
@@ -528,14 +646,14 @@
               }
             }
           },
+          "400": {
+            "$ref": "#/components/responses/ValidationError_400"
+          },
           "401": {
-            "$ref": "#/components/responses/401"
+            "description": "Token is expired or invalid\n"
           },
           "404": {
-            "$ref": "#/components/responses/404"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
+            "$ref": "#/components/responses/NotFoundError_404"
           }
         }
       }
@@ -555,8 +673,9 @@
         ],
         "requestBody": {
           "required": true,
+          "description": "# Description of request parameters:\n\n**name** - string, user's name. Field must contain a maximum of 32 characters.\n\n**email** - string, user's email. Field must contain a valid email.\n\n**gender** - string, user's gender. Field must contain one of two values: man, woman.\n\n**password** - string, user's old password. Field must contain at least 8 characters, maximum 64.\n\n**newPassword** - string, user's new password. Field must contain at least 8 characters, maximum 64.\n",
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -581,18 +700,6 @@
                     ],
                     "default": "woman"
                   },
-                  "avatar": {
-                    "description": "User's avatar",
-                    "type": "string",
-                    "default": null,
-                    "format": "binary",
-                    "example": "<https://res.cloudinary.com/dartenrtb/image/upload/v1724914466/waterTracker/ibt3icvvc6hpborulsjb.png>"
-                  },
-                  "waterRate": {
-                    "description": "User's daily water consumption rate",
-                    "type": "number",
-                    "default": 2000
-                  },
                   "password": {
                     "description": "User's password",
                     "type": "string",
@@ -610,29 +717,26 @@
         },
         "responses": {
           "200": {
-            "description": "User's data updated and returned\n\nDescription of response parameters:\n\n**_id** - ObjectId, unique user ID.\n\n**name** - string, user's name.\n\n**email** - string, user's email.\n\n**gender** - string, user's gender.\n\n**waterRate** - number, user's daily norm of water.\n\n**avatar** - string, user's avatar.\n",
+            "description": "User's data updated and returned\n\nDescription of response parameters:\n\n**name** - string, user's name.\n\n**email** - string, user's email.\n\n**gender** - string, user's gender.\n\n**waterRate** - number, user's daily water rate.\n\n**avatar** - string, user's avatar.\n",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/user"
+                  "$ref": "#/components/schemas/userResponse"
                 }
               }
             }
           },
           "400": {
-            "$ref": "#/components/responses/400"
+            "description": "Missed new password\n"
           },
           "401": {
-            "$ref": "#/components/responses/401"
+            "$ref": "#/components/responses/UnauthorizedError_401"
           },
           "404": {
-            "$ref": "#/components/responses/404"
+            "$ref": "#/components/responses/NotFoundError_404"
           },
           "409": {
-            "$ref": "#/components/responses/409"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
+            "$ref": "#/components/responses/ConflictError_409"
           }
         }
       }
@@ -693,16 +797,13 @@
             }
           },
           "400": {
-            "$ref": "#/components/responses/400"
+            "$ref": "#/components/responses/ValidationError_400"
           },
           "401": {
-            "$ref": "#/components/responses/401"
+            "$ref": "#/components/responses/UnauthorizedError_401"
           },
           "404": {
-            "$ref": "#/components/responses/404"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
+            "$ref": "#/components/responses/NotFoundError_404"
           }
         }
       }
@@ -722,20 +823,17 @@
         ],
         "responses": {
           "200": {
-            "description": "Logged user returned\n\nDescription of response parameters:\n\n**_id** - ObjectId, unique user ID.\n\n**name** - string, user's name.\n\n**email** - string, user's email.\n\n**gender** - string, user's gender.\n\n**avatar** - string, user's avatar.\n\n**waterRate** - string, user's daily water consumption rate.\n",
+            "description": "Logged user returned\n\nDescription of response parameters:\n\n**name** - string, user's name.\n\n**email** - string, user's email.\n\n**gender** - string, user's gender.\n\n**avatar** - string, user's avatar.\n\n**waterRate** - string, user's daily water consumption rate.\n",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/user"
+                  "$ref": "#/components/schemas/userResponse"
                 }
               }
             }
           },
           "401": {
-            "$ref": "#/components/responses/401"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
+            "$ref": "#/components/responses/UnauthorizedError_401"
           }
         }
       }
@@ -747,7 +845,7 @@
         ],
         "summary": "Change user's waterRate",
         "operationId": "WaterRateController_updateWaterRate",
-        "description": "Change and return user`s daily norm of water",
+        "description": "Change and return user`s daily  water consumption rate",
         "security": [
           {
             "bearerAuth": []
@@ -755,7 +853,7 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "# Description of request parameters:\n\n**waterRate** - number, User's daily norm of water.\n",
+          "description": "# Description of request parameters:\n\n**waterRate** - number, User's daily  water consumption rate. Field must contain min 1, max 15000.\n",
           "content": {
             "application/json": {
               "schema": {
@@ -765,7 +863,7 @@
                 ],
                 "properties": {
                   "waterRate": {
-                    "description": "User's daily norm of water",
+                    "description": "User's daily  water consumption rate",
                     "type": "number",
                     "default": 2000
                   }
@@ -786,7 +884,7 @@
                   ],
                   "properties": {
                     "waterRate": {
-                      "description": "User's daily norm of water",
+                      "description": "User's daily  water consumption rate",
                       "type": "number",
                       "default": 2000
                     }
@@ -796,16 +894,47 @@
             }
           },
           "400": {
-            "$ref": "#/components/responses/400"
+            "$ref": "#/components/responses/ValidationError_400"
           },
           "401": {
-            "$ref": "#/components/responses/401"
+            "$ref": "#/components/responses/UnauthorizedError_401"
           },
           "404": {
-            "$ref": "#/components/responses/404"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
+            "description": "Not Found error - Water note with id not found or Invalid ID format",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "NotFoundError"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "message"
+                      ],
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Water note with id not found or Invalid ID format"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -819,38 +948,38 @@
       }
     },
     "schemas": {
-      "water": {
+      "waterNoteResponse": {
         "type": "object",
         "required": [
           "_id",
-          "amount",
-          "time",
+          "waterVolume",
+          "date",
           "userId"
         ],
         "properties": {
           "_id": {
-            "description": "Water record ID",
+            "description": "Water note ID",
             "type": "string",
             "example": "65e4decdd286b30065d54af9"
           },
-          "amount": {
-            "description": "Amount of water in record",
+          "waterVolume": {
+            "description": "Amount of water in note",
             "type": "number",
             "example": 250
           },
-          "time": {
-            "description": "Time of water record",
+          "date": {
+            "description": "Time of water note",
             "type": "string",
             "example": "2024-08-28T03:30:00.000Z"
           },
           "userId": {
-            "description": "User's id of water record",
+            "description": "User's id of water note",
             "type": "string",
             "example": "65e4decdd286b30065d54af9"
           }
         }
       },
-      "todayWaterRecords": {
+      "todayWaterNotes": {
         "type": "object",
         "required": [
           "percentOfWaterRate",
@@ -863,17 +992,17 @@
             "example": "11%"
           },
           "todayWaterList": {
-            "description": "list of water records by today",
+            "description": "list of water notes by today",
             "type": "array",
             "items": {
-              "description": "Water record",
+              "description": "Water note",
               "type": "object",
-              "$ref": "#/components/schemas/water"
+              "$ref": "#/components/schemas/waterNoteResponse"
             }
           }
         }
       },
-      "monthlyWaterRecords": {
+      "monthlyWaterNotes": {
         "type": "array",
         "items": {
           "description": "Daily statistics about consumer water",
@@ -891,7 +1020,7 @@
               "example": "27, August"
             },
             "waterRate": {
-              "description": "User's daily norm of water",
+              "description": "User's daily water consumption rate",
               "type": "string",
               "example": "1.8 L"
             },
@@ -901,17 +1030,16 @@
               "example": "28%"
             },
             "amountOfRecords": {
-              "description": "Amount of water records by date",
+              "description": "Amount of water notes by date",
               "type": "number",
               "example": 5
             }
           }
         }
       },
-      "user": {
+      "userResponse": {
         "type": "object",
         "required": [
-          "_id",
           "name",
           "email",
           "gender",
@@ -919,11 +1047,6 @@
           "waterRate"
         ],
         "properties": {
-          "_id": {
-            "description": "User's id",
-            "type": "string",
-            "example": "65e4decdd286b30065d54af9"
-          },
           "name": {
             "description": "User's name",
             "type": "string",
@@ -969,7 +1092,7 @@
           "user": {
             "description": "Object with user's email",
             "type": "object",
-            "$ref": "#/components/schemas/user"
+            "$ref": "#/components/schemas/userResponse"
           },
           "token": {
             "description": "User's token",
@@ -999,8 +1122,8 @@
       }
     },
     "responses": {
-      "400": {
-        "description": "Bad Request",
+      "ValidationError_400": {
+        "description": "Validation error\n",
         "content": {
           "application/json": {
             "schema": {
@@ -1027,7 +1150,7 @@
                   "properties": {
                     "message": {
                       "type": "string",
-                      "example": "Missed new password"
+                      "example": "Bad Request"
                     }
                   }
                 }
@@ -1036,8 +1159,8 @@
           }
         }
       },
-      "401": {
-        "description": "Unauthorized error",
+      "UnauthorizedError_401": {
+        "description": "Unauthorized error - Invalid token - If the request does not\ncontain a valid token or the token has already expired, the\nserver will return a response with an HTTP 401 Unauthorized\nstatus code.\n",
         "content": {
           "application/json": {
             "schema": {
@@ -1073,45 +1196,8 @@
           }
         }
       },
-      "404": {
-        "description": "Not Found error",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "required": [
-                "status",
-                "message",
-                "data"
-              ],
-              "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 404
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Not Found error"
-                },
-                "data": {
-                  "type": "object",
-                  "required": [
-                    "message"
-                  ],
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "User not found"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "409": {
-        "description": "Conflict Error",
+      "ConflictError_409": {
+        "description": "Conflict Error - User with such email already exists",
         "content": {
           "application/json": {
             "schema": {
@@ -1147,7 +1233,44 @@
           }
         }
       },
-      "500": {
+      "NotFoundError_404": {
+        "description": "Not Found error - User not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 404
+                },
+                "message": {
+                  "type": "string",
+                  "example": "NotFoundError"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "User not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "EmailSendError_500": {
         "description": "Internal Server Error",
         "content": {
           "application/json": {
@@ -1175,7 +1298,7 @@
                   "properties": {
                     "message": {
                       "type": "string",
-                      "example": "Something went wrong"
+                      "example": "Failed to send the email, please try again later"
                     }
                   }
                 }

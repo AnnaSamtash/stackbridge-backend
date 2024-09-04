@@ -8,9 +8,9 @@ properties:
     type: string
     example: '11%'
   todayWaterList:
-    description: 'list of water records by today'
+    description: 'list of water notes by today'
     type: array
     items:
-      description: 'Water record'
+      description: 'Water note'
       type: object
-      $ref: '../../components/schemas/water.yaml'
+      $ref: waterNoteResponse.yaml

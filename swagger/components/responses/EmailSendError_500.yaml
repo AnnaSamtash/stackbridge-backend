@@ -21,4 +21,4 @@ content:
           properties:
             message:
               type: string
-              example: 'Something went wrong'
+              example: 'Failed to send the email, please try again later'

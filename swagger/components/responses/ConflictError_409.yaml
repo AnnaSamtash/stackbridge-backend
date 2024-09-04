@@ -1,4 +1,4 @@
-description: Conflict Error
+description: Conflict Error - User with such email already exists
 content:
   application/json:
     schema:

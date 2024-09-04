@@ -10,10 +10,10 @@ requestBody:
   description: |
     # Description of request parameters:
 
-    **email** - string, user's email.
+    **email** - string, user's email. Field must contain a valid email.
     **Required parameter**
 
-    **password** - string, user's password.
+    **password** - string, user's password. Field must contain at least 8 characters, maximum 64.
     **Required parameter**
 
   content:
@@ -59,9 +59,9 @@ responses:
       application/json:
         schema:
           $ref: '../../components/schemas/userWithTokenResponse.yaml'
+  '400':
+    $ref: '../../components/responses/ValidationError_400.yaml'
   '401':
-    $ref: '../../components/responses/401.yaml'
+    $ref: '../../components/responses/UnauthorizedError_401.yaml'
   '404':
-    $ref: '../../components/responses/404.yaml'
-  '500':
-    $ref: '../../components/responses/500.yaml'
+    $ref: '../../components/responses/NotFoundError_404.yaml'

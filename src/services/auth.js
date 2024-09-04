@@ -104,7 +104,7 @@ export const resetPasswordService = async (resetData) => {
       error.name === 'TokenExpiredError' ||
       error.name === 'JsonWebTokenError'
     )
-      throw createHttpError(401, 'Token is expired or invalid.');
+      throw createHttpError(401, 'Token is expired or invalid');
     throw error;
   }
 };

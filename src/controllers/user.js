@@ -48,7 +48,6 @@ export const getUserInfo = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   const userId = req.user._id;
-  const avatar = req.file;
   const { email, password, newPassword } = req.body;
 
   if (req.user.email !== email) {
@@ -74,20 +73,7 @@ export const updateUser = async (req, res) => {
     throw createHttpError(401, 'Unauthorized');
   }
 
-  let avatarUrl;
-
-  if (avatar) {
-    if (env('ENABLE_CLOUDINARY') === 'true') {
-      avatarUrl = await saveFileToCloudinary(avatar, 'waterTracker');
-    } else {
-      avatarUrl = await saveFileToUploadDir(avatar);
-    }
-  }
-
-  const updatedUser = await updateUserService(userId, {
-    ...req.body,
-    avatar: avatarUrl,
-  });
+  const updatedUser = await updateUserService(userId, req.body);
 
   if (!updatedUser) {
     throw createHttpError(404, 'User not found');

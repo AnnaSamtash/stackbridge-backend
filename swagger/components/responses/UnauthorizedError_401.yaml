@@ -1,4 +1,8 @@
-description: Bad Request
+description: |
+  Unauthorized error - Invalid token - If the request does not
+  contain a valid token or the token has already expired, the
+  server will return a response with an HTTP 401 Unauthorized
+  status code.
 content:
   application/json:
     schema:
@@ -10,10 +14,10 @@ content:
       properties:
         status:
           type: integer
-          example: 400
+          example: 401
         message:
           type: string
-          example: 'BadRequestError'
+          example: UnauthorizedError
         data:
           type: object
           required:
@@ -21,4 +25,4 @@ content:
           properties:
             message:
               type: string
-              example: 'Missed new password'
+              example: 'Unauthorized'

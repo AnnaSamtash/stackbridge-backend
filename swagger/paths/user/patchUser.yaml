@@ -9,8 +9,21 @@ security:
   - bearerAuth: []
 requestBody:
   required: true
+  description: |
+    # Description of request parameters:
+
+    **name** - string, user's name. Field must contain a maximum of 32 characters.
+
+    **email** - string, user's email. Field must contain a valid email.
+
+    **gender** - string, user's gender. Field must contain one of two values: man, woman.
+
+    **password** - string, user's old password. Field must contain at least 8 characters, maximum 64.
+
+    **newPassword** - string, user's new password. Field must contain at least 8 characters, maximum 64.
+
   content:
-    multipart/form-data:
+    application/json:
       schema:
         type: object
         properties:
@@ -29,12 +42,6 @@ requestBody:
             type: string
             enum: ['woman', 'man']
             default: woman
-          avatar:
-            description: "User's avatar"
-            type: string
-            default: null
-            format: binary
-            example: <https://res.cloudinary.com/dartenrtb/image/upload/v1724914466/waterTracker/ibt3icvvc6hpborulsjb.png>
           password:
             description: "User's password"
             type: string
@@ -56,21 +63,20 @@ responses:
 
       **gender** - string, user's gender.
 
-      **waterRate** - number, user's daily norm of water.
+      **waterRate** - number, user's daily water rate.
 
       **avatar** - string, user's avatar.
 
     content:
       application/json:
         schema:
-          $ref: '../../components/schemas/user.yaml'
+          $ref: ../../components/schemas/userResponse.yaml
   '400':
-    $ref: '../../components/responses/400.yaml'
+    description: |
+      Missed new password
   '401':
-    $ref: '../../components/responses/401.yaml'
+    $ref: ../../components/responses/UnauthorizedError_401.yaml
   '404':
-    $ref: '../../components/responses/404.yaml'
+    $ref: ../../components/responses/NotFoundError_404.yaml
   '409':
-    $ref: '../../components/responses/409.yaml'
-  '500':
-    $ref: '../../components/responses/500.yaml'
+    $ref: ../../components/responses/ConflictError_409.yaml

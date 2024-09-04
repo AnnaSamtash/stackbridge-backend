@@ -17,7 +17,8 @@ info:
     The project includes user registration, authentication, and authorization,
       with the ability to edit personal data and records. The application has a
       user-friendly interface, ensuring security through password encryption and
-      token-based identification. Also application supports password recovery via email.
+      token-based identification. Also application supports password recovery via
+      email.
 
     **Key Features:**
 
@@ -52,25 +53,25 @@ tags:
     description: Operations about users.
   - name: WaterRate
     description: Operations about waterRate.
-  - name: Water
-    description: Operations about water record.
+  - name: WaterNotes
+    description: Operations about water note.
 servers:
   - url: https://watertracker-app.onrender.com
 paths:
-  /water:
+  /waterNotes:
     post:
-      $ref: ../swagger/paths/water/postWater.yaml
-  /water/{id}:
+      $ref: ../swagger/paths/waterNote/postWaterNote.yaml
+  /waterNotes/{id}:
     delete:
-      $ref: ../swagger/paths/water/{id}/deleteWater.yaml
+      $ref: ../swagger/paths/waterNote/{id}/deleteWaterNote.yaml
     patch:
-      $ref: ../swagger/paths/water/{id}/patchWater.yaml
-  /water/today:
+      $ref: ../swagger/paths/waterNote/{id}/patchWaterNote.yaml
+  /waterNotes/today:
     get:
-      $ref: ../swagger/paths/water/getTodayWater.yaml
-  /water/{year}/{month}:
+      $ref: ../swagger/paths/waterNote/getTodayWaterNotes.yaml
+  /waterNotes/{year}/{month}:
     get:
-      $ref: ../swagger/paths/water/{year}/{month}/getMonthlyWater.yaml
+      $ref: ../swagger/paths/waterNote/{year}/{month}/getMonthlyWaterNotes.yaml
   /auth/signup:
     post:
       $ref: ../swagger/paths/auth/signUp.yaml

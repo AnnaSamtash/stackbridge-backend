@@ -1,0 +1,59 @@
+tags:
+  - WaterNotes
+summary: Create a water note
+operationId: WaterNoteController_createWaterNote
+description: |
+  Create a water note in the database and return it
+
+security:
+  - bearerAuth: []
+requestBody:
+  required: true
+  description: |
+    # Description of request parameters:
+
+    **waterVolume** - number, amount of water in note. Field must contain min 1, max 5000.
+    **Required parameter**
+
+    **date** - string, date of water note. Field must contain a valid date with a specified time in it.
+    **Required parameter**
+
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - waterVolume
+          - date
+        properties:
+          waterVolume:
+            description: 'Amount of water in note'
+            type: number
+            example: 250
+          date:
+            description: 'Date of water note'
+            type: string
+            example: '2024-08-29 05:30 AM'
+responses:
+  '201':
+    description: |
+      Water note created and returned
+
+      Description of response parameters:
+
+      **_id** - ObjectId, unique water note ID.
+
+      **waterVolume** - number, amount of water in note.
+
+      **date** - string, date of water note.
+
+      **userId** - ObjectId, unique user ID.
+
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/waterNoteResponse.yaml
+  '400':
+    $ref: ../../components/responses/ValidationError_400.yaml
+  '401':
+    $ref: '../../components/responses/UnauthorizedError_401.yaml'

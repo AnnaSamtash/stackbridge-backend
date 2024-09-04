@@ -3,7 +3,7 @@ tags:
 summary: Logout a user
 operationId: AuthController_logout
 description: |
-  The logout endpoint is a logout mechanism that destroys the 
+  The logout endpoint is a logout mechanism that destroys the
     token that was issued during previous authentication.
 
   When the user clicks the log out button, he makes a request for a
@@ -18,8 +18,6 @@ security:
 responses:
   '204':
     description: |
-      User successfully logged out
+      User logged out
   '401':
-    $ref: '../../components/responses/401.yaml'
-  '500':
-    $ref: '../../components/responses/500.yaml'
+    $ref: ../../components/responses/UnauthorizedError_401.yaml

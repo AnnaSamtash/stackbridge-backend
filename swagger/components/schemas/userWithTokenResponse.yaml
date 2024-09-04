@@ -6,7 +6,7 @@ properties:
   user:
     description: "Object with user's email"
     type: object
-    $ref: user.yaml
+    $ref: userResponse.yaml
   token:
     description: "User's token"
     type: string

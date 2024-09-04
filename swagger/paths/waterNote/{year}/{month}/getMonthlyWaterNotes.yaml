@@ -1,0 +1,71 @@
+tags:
+  - WaterNotes
+summary: Get all water notes for month
+operationId: WaterNoteController_getMonthlyWaterNotes
+description: |
+  Get and return all water notes for month
+
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: year
+    required: true
+    schema:
+      type: number
+      example: 2024
+  - in: path
+    name: month
+    required: true
+    schema:
+      type: number
+      example: 08
+responses:
+  '200':
+    description: |
+      Got and returned all water notes for month
+
+      Description of response parameters:
+
+      Return array of objects, each of which includes these properties:
+
+      **date** - string, date of month.
+
+      **waterRate** - number, user's daily water consumption rate.
+
+      **percentOfWaterRate** - string, percentage of water drunk to the
+      daily rate of water by date'.
+
+      **amountOfRecords** - number, amount of water notes by date.
+
+    content:
+      application/json:
+        schema:
+          $ref: '../../../../components/schemas/monthlyWaterNotes.yaml'
+  '401':
+    $ref: '../../../../components/responses/UnauthorizedError_401.yaml'
+  '404':
+    description: Not Found error - Water notes or user not found
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 404
+            message:
+              type: string
+              example: NotFoundError
+            data:
+              type: object
+              required:
+                - message
+              properties:
+                message:
+                  type: string
+                  example: 'Water notes or user not found'

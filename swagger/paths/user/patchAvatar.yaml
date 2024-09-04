@@ -42,10 +42,8 @@ responses:
               format: binary
               example: <https://res.cloudinary.com/dartenrtb/image/upload/v1724914466/waterTracker/ibt3icvvc6hpborulsjb.png>
   '400':
-    $ref: '../../components/responses/400.yaml'
+    $ref: ../../components/responses/ValidationError_400.yaml
   '401':
-    $ref: '../../components/responses/401.yaml'
+    $ref: ../../components/responses/UnauthorizedError_401.yaml
   '404':
-    $ref: '../../components/responses/404.yaml'
-  '500':
-    $ref: '../../components/responses/500.yaml'
+    $ref: ../../components/responses/NotFoundError_404.yaml

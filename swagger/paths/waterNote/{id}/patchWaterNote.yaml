@@ -1,0 +1,87 @@
+tags:
+  - WaterNotes
+summary: Update a water note
+operationId: WaterNoteController_updateWaterNote
+description: |
+  Update and return a water note
+
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: '65ca67e7ae7f10c88b598384'
+requestBody:
+  required: true
+  description: |
+    # Description of request parameters:
+
+    **waterVolume** - number, amount of water in note. Field must contain min 1, max 5000.
+
+    **date** - string, date of water note. Field must contain a valid date with a specified time in it.
+
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - waterVolume
+          - date
+        properties:
+          waterVolume:
+            description: 'Amount of water in note'
+            type: number
+            example: 250
+          date:
+            description: 'Date of water note'
+            type: string
+            example: '2024-08-29 05:30 AM'
+responses:
+  '200':
+    description: |
+      Water note updated by id and returned
+
+      Description of response parameters:
+
+      **_id** - ObjectId, unique water note ID.
+
+      **waterVolume** - number, amount of water in note.
+
+      **date** - string, date of water note.
+
+      **userId** - ObjectId, unique user ID.
+
+    content:
+      application/json:
+        schema:
+          $ref: ../../../components/schemas/waterNoteResponse.yaml
+  '401':
+    $ref: '../../../components/responses/UnauthorizedError_401.yaml'
+  '404':
+    description: Not Found error - Water note with id not found or Invalid ID format
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 404
+            message:
+              type: string
+              example: NotFoundError
+            data:
+              type: object
+              required:
+                - message
+              properties:
+                message:
+                  type: string
+                  example: 'Water note with id not found or Invalid ID format'
