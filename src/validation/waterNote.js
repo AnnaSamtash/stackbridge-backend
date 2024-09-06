@@ -7,8 +7,8 @@ export const waterSchema = Joi.object({
     'number.max': 'WaterVolume must be less than or equal to 5000',
     'any.required': 'WaterVolume is a required field',
   }),
-  date: Joi.string().required().messages({
-    'string.base': 'Date must be a string',
+  date: Joi.date().required().messages({
+    'date.base': 'Date must be a valid date',
     'any.required': 'Date is a required field',
   }),
 });
@@ -19,7 +19,7 @@ export const updateWaterSchema = Joi.object({
     'number.min': 'WaterVolume must be most than 1',
     'number.max': 'WaterVolume must be less than or equal to 5000',
   }),
-  date: Joi.string().messages({
-    'string.base': 'Date must be a string',
+  date: Joi.date().messages({
+    'date.base': 'Date must be a valid date',
   }),
 });

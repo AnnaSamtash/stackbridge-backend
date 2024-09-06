@@ -7,7 +7,7 @@
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "description": "**API documentation for project WaterTracker Web App**\n\nThis project is a web application for tracking and managing water intake|\n  throughout the day. It calculates an individual daily water consumption|\n  rate based on user data and provides statistics for daily and monthly|\n  consumption. This helps users adjust their lifestyle and monitor progress|\n  toward better health.\n\nThe project includes user registration, authentication, and authorization,|\n  with the ability to edit personal data and records. The application has a|\n  user-friendly interface, ensuring security through password encryption and|\n  token-based identification. Also application supports password recovery via|\n  email.\n\n**Key Features:**\n\nUser registration and authorization.\n\nUpdate personal data, avatar, and password.\n\nAdd, edit, and delete water intake records.\n\nCalculate and update daily water consumption rate.\n\nDisplay detailed daily and monthly water intake statistics.\n\nPassword recovery via email.\n\n**Technology stack used in the project:**\n\nNode.js - JavaScript server runtime\n\nExpress.js - framework for developing web applications on Node.js\n\nMongoDB - NoSQL Database\n\nMongoose - library for working with MongoDB in Node.js",
+    "description": "**API documentation for project WaterTracker Web App**\n\nThis project is a web application for tracking and managing water intake\n\n  throughout the day. It calculates an individual daily water consumption\n\n  rate based on user data and provides statistics for daily and monthly\n\n  consumption. This helps users adjust their lifestyle and monitor progress\n\n  toward better health.\n\nThe project includes user registration, authentication, and authorization,\n\n  with the ability to edit personal data and records. The application has a\n\n  user-friendly interface, ensuring security through password encryption and\n\n  token-based identification. Also application supports password recovery via\n  \n  email.\n\n**Key Features:**\n\nUser registration and authorization.\n\nUpdate personal data, avatar, and password.\n\nAdd, edit, and delete water intake records.\n\nCalculate and update daily water consumption rate.\n\nDisplay detailed daily and monthly water intake statistics.\n\nPassword recovery via email.\n\n**Technology stack used in the project:**\n\nNode.js - JavaScript server runtime\n\nExpress.js - framework for developing web applications on Node.js\n\nMongoDB - NoSQL Database\n\nMongoose - library for working with MongoDB in Node.js",
     "contact": {
       "email": "annasamtash@gmail.com"
     }
@@ -54,7 +54,7 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "# Description of request parameters:\n\n**waterVolume** - number, amount of water in note. Field must contain min 1, max 5000.\n**Required parameter**\n\n**date** - string, date of water note. Field must contain a valid date with a specified time in it.\n**Required parameter**\n",
+          "description": "# Description of request parameters:\n\n**waterVolume** - number, amount of water in note. Field must contain min 1, max 5000.\n**Required parameter**\n\n**date** - string, date of water note. Field must contain a valid date with a specified time in UTC format.\n**Required parameter**\n",
           "content": {
             "application/json": {
               "schema": {
@@ -72,7 +72,7 @@
                   "date": {
                     "description": "Date of water note",
                     "type": "string",
-                    "example": "2024-08-29 05:30 AM"
+                    "example": "2024-09-03T18:10:00.000+00:00"
                   }
                 }
               }
@@ -194,7 +194,7 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "# Description of request parameters:\n\n**waterVolume** - number, amount of water in note. Field must contain min 1, max 5000.\n\n**date** - string, date of water note. Field must contain a valid date with a specified time in it.\n",
+          "description": "# Description of request parameters:\n\n**waterVolume** - number, amount of water in note. Field must contain min 1, max 5000.\n\n**date** - string, date of water note. Field must contain a valid date with a specified time in UTC format.\n",
           "content": {
             "application/json": {
               "schema": {
@@ -212,7 +212,7 @@
                   "date": {
                     "description": "Date of water note",
                     "type": "string",
-                    "example": "2024-08-29 05:30 AM"
+                    "example": "2024-09-03T18:10:00.000+00:00"
                   }
                 }
               }
@@ -288,7 +288,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Got and returned all water notes for today\n\nDescription of response parameters:\n\nReturn array of objects, each of which includes these properties:\n\n**_id** - ObjectId, unique water note ID.\n\n** waterVolume** - number, amount of water in note.\n\n**date** - string, date of water note.\n\n**serId** - ObjectId, unique user ID.\n",
+            "description": "Got and returned all water notes for today\n\nDescription of response parameters:\n\nReturn array of objects, each of which includes these properties:\n\n**_id** - ObjectId, unique water note ID.\n\n**waterVolume** - number, amount of water in note.\n\n**date** - string, date of water note.\n\n**serId** - ObjectId, unique user ID.\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -968,7 +968,7 @@
             "example": 250
           },
           "date": {
-            "description": "Time of water note",
+            "description": "Date of water note",
             "type": "string",
             "example": "2024-08-28T03:30:00.000Z"
           },

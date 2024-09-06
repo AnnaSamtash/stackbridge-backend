@@ -14,7 +14,7 @@ properties:
     type: number
     example: 250
   date:
-    description: 'Time of water note'
+    description: 'Date of water note'
     type: string
     example: '2024-08-28T03:30:00.000Z'
   userId:

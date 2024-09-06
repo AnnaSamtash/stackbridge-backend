@@ -6,20 +6,12 @@ import {
   getTodayWaterNotesService,
   updateWaterInfoService,
 } from '../services/waterNote.js';
-import moment from 'moment-timezone';
 
 export const createWaterNote = async (req, res) => {
   const userId = req.user._id;
-  const { date, waterVolume } = req.body;
-
-  const utcDate = moment
-    .tz(date, 'YYYY-MM-DD HH:mm:ss', 'Europe/Kiev')
-    .utc()
-    .format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
 
   const waterData = await createWaterInfoService({
-    date: utcDate,
-    waterVolume,
+    ...req.body,
     userId,
   });
 

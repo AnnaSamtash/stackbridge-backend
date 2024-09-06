@@ -21,7 +21,7 @@ requestBody:
 
     **waterVolume** - number, amount of water in note. Field must contain min 1, max 5000.
 
-    **date** - string, date of water note. Field must contain a valid date with a specified time in it.
+    **date** - string, date of water note. Field must contain a valid date with a specified time in UTC format.
 
   content:
     application/json:
@@ -38,7 +38,7 @@ requestBody:
           date:
             description: 'Date of water note'
             type: string
-            example: '2024-08-29 05:30 AM'
+            example: '2024-09-03T18:10:00.000+00:00'
 responses:
   '200':
     description: |

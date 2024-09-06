@@ -13,8 +13,8 @@ export const deleteWaterInfoService = (id, userId) =>
   WaterNote.findOneAndDelete({ _id: id, userId });
 
 export const getTodayWaterNotesService = async (userId) => {
-  const start = moment.tz('Europe/Kiev').startOf('day').utc().toDate();
-  const end = moment.tz('Europe/Kiev').endOf('day').utc().toDate();
+  const start = moment.utc().startOf('day').toDate();
+  const end = moment.utc().endOf('day').toDate();
 
   const [todayWaterNotesList, user] = await Promise.all([
     WaterNote.find({ userId, date: { $gte: start, $lte: end } }).lean(),
@@ -36,15 +36,19 @@ export const getTodayWaterNotesService = async (userId) => {
 
 export const getMonthlyWaterNotesService = async (userId, year, month) => {
   const start = moment
-    .tz(`${year}-${month}`, 'YYYY-MM', 'Europe/Kiev')
-    .startOf('month')
     .utc()
+    .year(year)
+    .month(month - 1)
+    .startOf('month')
     .toDate();
   const end = moment
-    .tz(`${year}-${month}`, 'YYYY-MM', 'Europe/Kiev')
-    .endOf('month')
     .utc()
+    .year(year)
+    .month(month - 1)
+    .endOf('month')
     .toDate();
+
+  console.log(start, end);
 
   const [monthlyWaterNotes, user] = await Promise.all([
     WaterNote.find({ userId, date: { $gte: start, $lte: end } }).lean(),
@@ -77,7 +81,7 @@ export const getMonthlyWaterNotesService = async (userId, year, month) => {
     );
 
     return {
-      date: `${date}, ${moment(end).format('MMMM')}`,
+      date: `${date}, ${moment(start).format('MMMM')}`,
       waterRate: `${(waterRate / 1000).toFixed(1)} L`,
       percentOfWaterRate: `${percentOfWaterRate}%`,
       amountOfRecords: count,
