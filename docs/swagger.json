@@ -7,7 +7,7 @@
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "description": "**API documentation for project WaterTracker Web App**\n\nThis project is a web application for tracking and managing water intake\n\n  throughout the day. It calculates an individual daily water consumption\n\n  rate based on user data and provides statistics for daily and monthly\n\n  consumption. This helps users adjust their lifestyle and monitor progress\n\n  toward better health.\n\nThe project includes user registration, authentication, and authorization,\n\n  with the ability to edit personal data and records. The application has a\n\n  user-friendly interface, ensuring security through password encryption and\n\n  token-based identification. Also application supports password recovery via\n  \n  email.\n\n**Key Features:**\n\nUser registration and authorization.\n\nUpdate personal data, avatar, and password.\n\nAdd, edit, and delete water intake records.\n\nCalculate and update daily water consumption rate.\n\nDisplay detailed daily and monthly water intake statistics.\n\nPassword recovery via email.\n\n**Technology stack used in the project:**\n\nNode.js - JavaScript server runtime\n\nExpress.js - framework for developing web applications on Node.js\n\nMongoDB - NoSQL Database\n\nMongoose - library for working with MongoDB in Node.js",
+    "description": "**API documentation for project WaterTracker Web App**\n\nThis project is a web application for tracking and managing water intake\n  throughout the day. It calculates an individual daily water consumption\n  rate based on user data and provides statistics for daily and monthly\n  consumption. This helps users adjust their lifestyle and monitor progress\n  toward better health.\n\nThe project includes user registration, authentication, and authorization,\n  with the ability to edit personal data and records. The application has a\n  user-friendly interface, ensuring security through password encryption and\n  token-based identification. Also application supports password recovery via\n  email.\n\n**Key Features:**\n\nUser registration and authorization.\n\nUpdate personal data, avatar, and password.\n\nAdd, edit, and delete water intake records.\n\nCalculate and update daily water consumption rate.\n\nDisplay detailed daily and monthly water intake statistics.\n\nPassword recovery via email.\n\n**Technology stack used in the project:**\n\nNode.js - JavaScript server runtime\n\nExpress.js - framework for developing web applications on Node.js\n\nMongoDB - NoSQL Database\n\nMongoose - library for working with MongoDB in Node.js",
     "contact": {
       "email": "annasamtash@gmail.com"
     }
@@ -15,9 +15,6 @@
   "servers": [
     {
       "url": "https://watertracker-app.onrender.com"
-    },
-    {
-      "url": "http://localhost:3000"
     }
   ],
   "tags": [
@@ -41,9 +38,7 @@
   "paths": {
     "/waterNotes": {
       "post": {
-        "tags": [
-          "WaterNotes"
-        ],
+        "tags": ["WaterNotes"],
         "summary": "Create a water note",
         "operationId": "WaterNoteController_createWaterNote",
         "description": "Create a water note in the database and return it\n",
@@ -59,10 +54,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "waterVolume",
-                  "date"
-                ],
+                "required": ["waterVolume", "date"],
                 "properties": {
                   "waterVolume": {
                     "description": "Amount of water in note",
@@ -101,9 +93,7 @@
     },
     "/waterNotes/{id}": {
       "delete": {
-        "tags": [
-          "WaterNotes"
-        ],
+        "tags": ["WaterNotes"],
         "summary": "Delete a water note",
         "operationId": "WaterNoteController_deleteWaterNote",
         "description": "Delete a water note\n",
@@ -136,11 +126,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
+                  "required": ["status", "message", "data"],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -152,9 +138,7 @@
                     },
                     "data": {
                       "type": "object",
-                      "required": [
-                        "message"
-                      ],
+                      "required": ["message"],
                       "properties": {
                         "message": {
                           "type": "string",
@@ -170,9 +154,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "WaterNotes"
-        ],
+        "tags": ["WaterNotes"],
         "summary": "Update a water note",
         "operationId": "WaterNoteController_updateWaterNote",
         "description": "Update and return a water note\n",
@@ -199,10 +181,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "waterVolume",
-                  "date"
-                ],
+                "required": ["waterVolume", "date"],
                 "properties": {
                   "waterVolume": {
                     "description": "Amount of water in note",
@@ -239,11 +218,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
+                  "required": ["status", "message", "data"],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -255,9 +230,7 @@
                     },
                     "data": {
                       "type": "object",
-                      "required": [
-                        "message"
-                      ],
+                      "required": ["message"],
                       "properties": {
                         "message": {
                           "type": "string",
@@ -275,9 +248,7 @@
     },
     "/waterNotes/today": {
       "get": {
-        "tags": [
-          "WaterNotes"
-        ],
+        "tags": ["WaterNotes"],
         "summary": "Get all water notes for today",
         "operationId": "WaterNoteController_getTodayWaterNotes",
         "description": "Get and return all water notes for today\n",
@@ -306,11 +277,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
+                  "required": ["status", "message", "data"],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -322,9 +289,7 @@
                     },
                     "data": {
                       "type": "object",
-                      "required": [
-                        "message"
-                      ],
+                      "required": ["message"],
                       "properties": {
                         "message": {
                           "type": "string",
@@ -342,9 +307,7 @@
     },
     "/waterNotes/{year}/{month}": {
       "get": {
-        "tags": [
-          "WaterNotes"
-        ],
+        "tags": ["WaterNotes"],
         "summary": "Get all water notes for month",
         "operationId": "WaterNoteController_getMonthlyWaterNotes",
         "description": "Get and return all water notes for month\n",
@@ -393,11 +356,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
+                  "required": ["status", "message", "data"],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -409,9 +368,7 @@
                     },
                     "data": {
                       "type": "object",
-                      "required": [
-                        "message"
-                      ],
+                      "required": ["message"],
                       "properties": {
                         "message": {
                           "type": "string",
@@ -429,9 +386,7 @@
     },
     "/auth/signup": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Sign up new user",
         "operationId": "AuthController_registerUser",
         "description": "Create a new user in the database\n",
@@ -443,10 +398,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "email",
-                  "password"
-                ],
+                "required": ["email", "password"],
                 "properties": {
                   "email": {
                     "description": "User's email",
@@ -485,9 +437,7 @@
     },
     "/auth/signin": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Sign in existing user",
         "operationId": "AuthController_loginUser",
         "description": "User authentication and authorization by passed email and password\n",
@@ -499,10 +449,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "email",
-                  "password"
-                ],
+                "required": ["email", "password"],
                 "properties": {
                   "email": {
                     "description": "User's email",
@@ -544,9 +491,7 @@
     },
     "/auth/logout": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Logout a user",
         "operationId": "AuthController_logout",
         "description": "The logout endpoint is a logout mechanism that destroys the\n  token that was issued during previous authentication.\n\nWhen the user clicks the log out button, he makes a request for a\n  URL/api/auth/logout with a valid token in the Authorization header.\n  The server checks the validity of the token, if the token is valid,\n  then the token is deleted and the user returns to the login page.\n  If the token is not valid, the server returns the 401 status and\n  reports that the token is invalid.\n",
@@ -567,9 +512,7 @@
     },
     "/auth/forgot-password": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Send email for reset password",
         "operationId": "AuthController_requestResetEmail",
         "description": "Create reset jwt and send email with link to reset password page\n\nWhen the user presses the password reset button, he makes a request\n  to URL/api/auth/send-reset-email with a registered email. The server\n  checks the presence of the user in the system using the transmitted\n  email, if it finds that it forms a jwt token and transfers it to the link\n  to reset password page in the email.If a user with such mail is not found,\n  then the server returns this result in an error with the status 404th.\n",
@@ -581,9 +524,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "email"
-                ],
+                "required": ["email"],
                 "properties": {
                   "email": {
                     "description": "User's email",
@@ -617,9 +558,7 @@
     },
     "/auth/update-password": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Reset password",
         "operationId": "AuthController_resetPassword",
         "description": "Overwrites the user password field value in the database\n",
@@ -660,9 +599,7 @@
     },
     "/users": {
       "patch": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Update current user's data",
         "operationId": "UsersController_updatedUser",
         "description": "Update and return current user's data\n",
@@ -694,10 +631,7 @@
                   "gender": {
                     "description": "User's gender",
                     "type": "string",
-                    "enum": [
-                      "woman",
-                      "man"
-                    ],
+                    "enum": ["woman", "man"],
                     "default": "woman"
                   },
                   "password": {
@@ -743,9 +677,7 @@
     },
     "/users/avatar": {
       "patch": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Update user's avatar'",
         "operationId": "UsersController_updateUserAvatar",
         "description": "Update and return user's avatar\n",
@@ -780,9 +712,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "avatar"
-                  ],
+                  "required": ["avatar"],
                   "properties": {
                     "avatar": {
                       "description": "User's avatar",
@@ -810,9 +740,7 @@
     },
     "/users/current": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Get current user information",
         "operationId": "UsersController_getUserInfo",
         "description": "Get and return current user's data from database\n",
@@ -840,9 +768,7 @@
     },
     "/waterRate": {
       "patch": {
-        "tags": [
-          "WaterRate"
-        ],
+        "tags": ["WaterRate"],
         "summary": "Change user's waterRate",
         "operationId": "WaterRateController_updateWaterRate",
         "description": "Change and return user`s daily  water consumption rate",
@@ -858,9 +784,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "waterRate"
-                ],
+                "required": ["waterRate"],
                 "properties": {
                   "waterRate": {
                     "description": "User's daily  water consumption rate",
@@ -879,9 +803,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "waterRate"
-                  ],
+                  "required": ["waterRate"],
                   "properties": {
                     "waterRate": {
                       "description": "User's daily  water consumption rate",
@@ -905,11 +827,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
+                  "required": ["status", "message", "data"],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -921,9 +839,7 @@
                     },
                     "data": {
                       "type": "object",
-                      "required": [
-                        "message"
-                      ],
+                      "required": ["message"],
                       "properties": {
                         "message": {
                           "type": "string",
@@ -950,12 +866,7 @@
     "schemas": {
       "waterNoteResponse": {
         "type": "object",
-        "required": [
-          "_id",
-          "waterVolume",
-          "date",
-          "userId"
-        ],
+        "required": ["_id", "waterVolume", "date", "userId"],
         "properties": {
           "_id": {
             "description": "Water note ID",
@@ -981,10 +892,7 @@
       },
       "todayWaterNotes": {
         "type": "object",
-        "required": [
-          "percentOfWaterRate",
-          "todayWaterList"
-        ],
+        "required": ["percentOfWaterRate", "todayWaterList"],
         "properties": {
           "percentOfWaterRate": {
             "description": "Percentage of water drunk to the daily water rate ",
@@ -1039,13 +947,7 @@
       },
       "userResponse": {
         "type": "object",
-        "required": [
-          "name",
-          "email",
-          "gender",
-          "avatar",
-          "waterRate"
-        ],
+        "required": ["name", "email", "gender", "avatar", "waterRate"],
         "properties": {
           "name": {
             "description": "User's name",
@@ -1062,10 +964,7 @@
           "gender": {
             "description": "User's gender",
             "type": "string",
-            "enum": [
-              "woman",
-              "man"
-            ],
+            "enum": ["woman", "man"],
             "default": "woman"
           },
           "avatar": {
@@ -1084,10 +983,7 @@
       },
       "userWithTokenResponse": {
         "type": "object",
-        "required": [
-          "user",
-          "token"
-        ],
+        "required": ["user", "token"],
         "properties": {
           "user": {
             "description": "Object with user's email",
@@ -1103,10 +999,7 @@
       },
       "resetPassword": {
         "type": "object",
-        "required": [
-          "password",
-          "token"
-        ],
+        "required": ["password", "token"],
         "properties": {
           "password": {
             "description": "User's password",
@@ -1128,11 +1021,7 @@
           "application/json": {
             "schema": {
               "type": "object",
-              "required": [
-                "status",
-                "message",
-                "data"
-              ],
+              "required": ["status", "message", "data"],
               "properties": {
                 "status": {
                   "type": "integer",
@@ -1144,9 +1033,7 @@
                 },
                 "data": {
                   "type": "object",
-                  "required": [
-                    "message"
-                  ],
+                  "required": ["message"],
                   "properties": {
                     "message": {
                       "type": "string",
@@ -1165,11 +1052,7 @@
           "application/json": {
             "schema": {
               "type": "object",
-              "required": [
-                "status",
-                "message",
-                "data"
-              ],
+              "required": ["status", "message", "data"],
               "properties": {
                 "status": {
                   "type": "integer",
@@ -1181,9 +1064,7 @@
                 },
                 "data": {
                   "type": "object",
-                  "required": [
-                    "message"
-                  ],
+                  "required": ["message"],
                   "properties": {
                     "message": {
                       "type": "string",
@@ -1202,11 +1083,7 @@
           "application/json": {
             "schema": {
               "type": "object",
-              "required": [
-                "status",
-                "message",
-                "data"
-              ],
+              "required": ["status", "message", "data"],
               "properties": {
                 "status": {
                   "type": "integer",
@@ -1218,9 +1095,7 @@
                 },
                 "data": {
                   "type": "object",
-                  "required": [
-                    "message"
-                  ],
+                  "required": ["message"],
                   "properties": {
                     "message": {
                       "type": "string",
@@ -1239,11 +1114,7 @@
           "application/json": {
             "schema": {
               "type": "object",
-              "required": [
-                "status",
-                "message",
-                "data"
-              ],
+              "required": ["status", "message", "data"],
               "properties": {
                 "status": {
                   "type": "integer",
@@ -1255,9 +1126,7 @@
                 },
                 "data": {
                   "type": "object",
-                  "required": [
-                    "message"
-                  ],
+                  "required": ["message"],
                   "properties": {
                     "message": {
                       "type": "string",
@@ -1276,11 +1145,7 @@
           "application/json": {
             "schema": {
               "type": "object",
-              "required": [
-                "status",
-                "message",
-                "data"
-              ],
+              "required": ["status", "message", "data"],
               "properties": {
                 "status": {
                   "type": "integer",
@@ -1292,9 +1157,7 @@
                 },
                 "data": {
                   "type": "object",
-                  "required": [
-                    "message"
-                  ],
+                  "required": ["message"],
                   "properties": {
                     "message": {
                       "type": "string",
